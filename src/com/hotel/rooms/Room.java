@@ -19,7 +19,7 @@ public class Room {
 		this.rprice = rprice;
 	}
 
-	public Integer getCid() {
+	public Integer getRid() {
 		return rid;
 	}
 

@@ -5,12 +5,33 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class availableRoom {
+@ManagedBean(name="availableRoom")
+public class AvailableRoom {
+	
+	private String startDate;
+	private String endDate;
+	
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+	
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+	
 	public List<Room> getRooms() throws ClassNotFoundException, SQLException {
 		Connection connect = null;
 	
-		String url = "jdbc:mysql://localhost:3306/test";
-	
+		String url = "jdbc:mysql://localhost:3306/hotel";
+		
 		String username = "root";
 		String password = "root";
 		
@@ -21,24 +42,26 @@ public class availableRoom {
 			System.out.println("in exec");
 			System.out.println(ex.getMessage());
 		}
-		PreparedStatement pstmt = connect.prepareStatement("select ID, Name, Capacit, Beds, Price from rooms");
+		PreparedStatement pstmt = connect.prepareStatement("SELECT RID, Name, Capacity, NumOfBeds, Price FROM room WHERE RID NOT IN "
+				+ "(SELECT RID FROM bookinginfo WHERE Start_Date >= ? or End_Date <= ? )");
+		pstmt.setString(1, getStartDate());
+		pstmt.setString(2, getEndDate());
 		ResultSet rs = pstmt.executeQuery();
 		
-		List<Room> Rooms = new ArrayList<Room>();
+		List<Room> rooms = new ArrayList<Room>();
 		while (rs.next()) {
 			Room room = new Room();
-			room.setRid(rs.getInt("ID"));
+			room.setRid(rs.getInt("RID"));
 			room.setRname(rs.getString("Name"));
 			room.setRcapacity(rs.getInt("Capacity"));
-			room.setRbeds(rs.getInt("Beds"));
+			room.setRbeds(rs.getInt("NumOfBeds"));
 			room.setRprice(rs.getInt("Price"));
-			Rooms.add(room);
+			rooms.add(room);
 		}
 		rs.close();
 		pstmt.close();
 		connect.close();
-		System.out.print(Rooms);
-		return Rooms;
+		return rooms;
 
 	}
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 	xmlns:f="http://java.sun.com/jsf/core" 	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+    
+    <title>Room Lookup Test</title>  
+    <style>
+    		.error {color:red}
+    </style>
+          
+</h:head>
+<h:body>
+	
+	<h:form>
+		Start Date: <h:inputText value="#{availableRoom.startDate}" label="Start Date" />	
+        End Date: <h:inputText value="#{availableRoom.endDate}" label="End Date"/>
+	    <h:commandButton value="Submit" action="availableRooms" />
+	    <!--  when the submit is hit, the value in StudentOne will be updated, and student_one_response will be called, but no value will be sent to studetn_one_response automatically 
+		-->
+	</h:form>
+
+</h:body>
+</html>
+
+
+
+
+
