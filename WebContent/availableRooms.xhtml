@@ -8,6 +8,7 @@
 <h:body>
 	<h2>Room Info</h2>
 	Start Date: #{availableRoom.startDate} End Date: #{availableRoom.endDate}<br/>
+	Number of People: #{availableRoom.numOfPeople}
 	
 	<h:dataTable value="#{availableRoom.rooms}" var="room" border="2">
 		<h:column>

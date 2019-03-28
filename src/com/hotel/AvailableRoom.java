@@ -1,4 +1,4 @@
-package com.hotel.rooms;
+package com.hotel;
 
 import javax.faces.bean.ManagedBean;
 import java.sql.*;
@@ -10,6 +10,7 @@ public class AvailableRoom {
 	
 	private String startDate;
 	private String endDate;
+	private int numOfPeople;
 	
 	public String getStartDate() {
 		return startDate;
@@ -27,6 +28,14 @@ public class AvailableRoom {
 		this.endDate = endDate;
 	}
 	
+	public int getNumOfPeople() {
+		return numOfPeople;
+	}
+	
+	public void setNumOfPeople(int numOfPeople) {
+		this.numOfPeople = numOfPeople;
+	}
+	
 	public List<Room> getRooms() throws ClassNotFoundException, SQLException {
 		Connection connect = null;
 	
@@ -42,10 +51,12 @@ public class AvailableRoom {
 			System.out.println("in exec");
 			System.out.println(ex.getMessage());
 		}
-		PreparedStatement pstmt = connect.prepareStatement("SELECT RID, Name, Capacity, NumOfBeds, Price FROM room WHERE RID NOT IN "
-				+ "(SELECT RID FROM bookinginfo WHERE Start_Date >= ? or End_Date <= ? )");
+		PreparedStatement pstmt = connect.prepareStatement("SELECT RID, Name, Capacity, NumOfBeds, Price FROM room WHERE "
+				+ "(RID NOT IN (SELECT RID FROM bookinginfo WHERE Start_Date >= ? or End_Date <= ? ))"
+				+ " AND (Capacity >= ?)");
 		pstmt.setString(1, getStartDate());
 		pstmt.setString(2, getEndDate());
+		pstmt.setInt(3, getNumOfPeople());
 		ResultSet rs = pstmt.executeQuery();
 		
 		List<Room> rooms = new ArrayList<Room>();

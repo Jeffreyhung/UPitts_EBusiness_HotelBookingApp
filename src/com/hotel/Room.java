@@ -1,4 +1,4 @@
-package com.hotel.rooms;
+package com.hotel;
 
 public class Room {
 
