@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"></link>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+	<title>Order</title>
+
+	<h:outputStylesheet library="css" name="memo.css" />
+
+</h:head>
+
+<h:body>
+
+	<div id="wrapper">
+		<div id="header" class="row">
+			<div class="col-sm-6 text-left"><h1>LOGO</h1></div>
+			<div class="col-sm-6 text-right"><a href=""><font color="white"><h4>Sign in/up</h4></font></a></div>
+		</div>
+	</div>
+	<div class="row">
+
+		<div class="col-sm-5" style="background-color:rgba(50,50,50,0.1);">
+			<div id="container">
+				<div class="text-center"><h3>Order Details</h3></div>
+
+				<h:messages globalOnly="true" />
+
+				<h:form id="form2" style="margin-top: 10px;">
+					<h:panelGrid columns="3">
+
+						<h:outputLabel><h4>Check in:</h4></h:outputLabel>
+						<h:outputText value="#{ckDate}" id="ckDate" />
+						<h:outputLabel></h:outputLabel>
+
+						<h:outputLabel><h4>Check out:</h4></h:outputLabel>
+						<h:outputText value="#{coDate}" id="coDate" />
+						<h:outputLabel></h:outputLabel>
+
+						<h:outputLabel><h4>Days:</h4></h:outputLabel>
+						<h:outputText value="#{days}" id="days"/>
+						<h:outputLabel></h:outputLabel>
+
+						<h:outputLabel></h:outputLabel>
+						<a href="">Want to change the date?</a>			
+						<h:outputLabel></h:outputLabel>
+						
+						<h:outputLabel><h4>Room:</h4></h:outputLabel>
+						<h:outputLabel></h:outputLabel>
+						<h:outputLabel></h:outputLabel>
+						
+						<h:outputText value="#{rname}" id="rname"/>
+						<h:outputLabel></h:outputLabel>
+						<h:outputLabel></h:outputLabel>
+						
+						<h:outputLabel></h:outputLabel>
+						<a href="">Want to change the room?</a>			
+						<h:outputLabel></h:outputLabel>
+
+					</h:panelGrid>
+				</h:form>
+			</div>
+			
+			
+			
+
+
+		</div>
+		<div class="col-sm-7">
+			<div id="container">
+				<div class="text-center"><h3>Input Your Information</h3></div>
+
+				<h:messages globalOnly="true" />
+
+				<h:form id="form" style="margin-top: 10px;">
+					<h:panelGrid columns="3">
+
+						<h:outputLabel>FirstName:</h:outputLabel>
+						<h:inputText value="#{firstName}" id="firstName" />
+						<h:message for="firstName" />
+
+						<h:outputLabel>LastName:</h:outputLabel>
+						<h:inputText value="#{lastName}" id="lastName" />
+						<h:message for="lastName" />
+
+						<h:outputLabel>Email:</h:outputLabel>
+						<h:inputText value="#{email}" id="email" required="true"
+							requiredMessage="Your email is mandatory." />
+						<h:message for="email" />
+
+						<h:outputLabel>Phone:</h:outputLabel>
+						<h:inputText value="#{phone}" id="phone" required="true"
+							requiredMessage="Your phone is mandatory." />
+						<h:message for="phone" />
+						
+						<h:outputLabel>Address:</h:outputLabel>
+						<h:inputText value="#{address}" id="address" required="true"
+							requiredMessage="Your address is mandatory." />
+						<h:message for="address" />
+						
+						<h:outputLabel>Memo:</h:outputLabel>
+						<h:inputText value="#{memo}" id="memo" />
+						<h:message for="memo" />
+
+
+						<h:outputLabel />
+						<h:commandButton value="Submit" styleClass="save" />
+
+					</h:panelGrid>
+				</h:form>
+			</div>
+
+		</div>
+	</div>
+
+	<div style="clear: both;"></div>
+
+	<p style="margin:20px">
+		<h:outputLink value="">Back to Home Page</h:outputLink>
+	</p>
+
+
+</h:body>
+</html>
