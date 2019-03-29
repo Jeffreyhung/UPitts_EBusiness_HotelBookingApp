@@ -31,7 +31,11 @@
            #{room.rprice}
        </h:column>
        <h:column style="text-align: center">
-            <h:commandButton action="#{bookingInfo.addRoom(room.rid, availableRoom.startDate, availableRoom.endDate)}" value="Select" />
+            <h:commandButton action="#{bookingManage.select(room.rid, availableRoom.startDate, availableRoom.endDate)}" value="Select" >
+            	<f:param name="rid" value="#{room.rid}"/>
+            	<f:param name="startDate" value="#{availableRoom.startDate}"/>
+            	<f:param name="endDate" value="#{availableRoom.endDate}"/>
+            </h:commandButton>
         </h:column>
 	</h:dataTable>
 	</h:form>

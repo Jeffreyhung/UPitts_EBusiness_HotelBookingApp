@@ -58,20 +58,6 @@ public class BookingInfo {
 	
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
-	}
-	
-	public String addRoom(int rid, String startDate, String endDate) {
-		System.out.println(rid);
-		this.rid = rid;
-		this.startDate = startDate;
-		this.endDate = endDate;	
-		
-	    return "order";
-	}
-	
-//	public String addRoom() {
-//		System.out.println("Test");
-//		return "order?faces-redirect=true";
-//	}
-	
+	}	
+
 }

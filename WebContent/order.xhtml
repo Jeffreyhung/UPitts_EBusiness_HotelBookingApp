@@ -8,6 +8,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <title>Order</title>
     <h:outputStylesheet library="css" name="memo.css"/>
+    <f:view>
+         <f:metadata>
+             <f:viewParam id="rid" name="userId" value="#{bookingManage.bookingInfo.rid}" required="true"/>
+             <f:viewParam id="startDate" name="userId" value="#{bookingManage.bookingInfo.startDate}" required="true"/>
+             <f:viewParam id="endDate" name="userId" value="#{bookingManage.bookingInfo.endDate}" required="true"/>
+             <f:event type="preRenderView" listener="#{bookingManage.onload}" />
+    </f:metadata>
+
+    </f:view>
 </h:head>
 <h:body>
     <div id="wrapper">
@@ -30,36 +39,27 @@
                 </div>
                 <h:messages globalOnly="true" />
                 <h:form id="form2" style="margin-top: 10px;">
-                    <h:panelGrid columns="3">
+                    <h:panelGrid columns="2">
                         <h:outputLabel>
                             <h4>Check in:</h4>
                         </h:outputLabel>
                         <h:outputText value="#{bookingInfo.startDate}" id="ckDate" />
-                        <h:outputLabel></h:outputLabel>
                         <h:outputLabel>
                             <h4>Check out:</h4>
                         </h:outputLabel>
                         <h:outputText value="#{bookingInfo.endDate}" id="coDate" />
-                        <h:outputLabel></h:outputLabel>
                         <h:outputLabel>
                             <h4>Days:</h4>
                         </h:outputLabel>
                         <h:outputText value="#{days}" id="days" />
                         <h:outputLabel></h:outputLabel>
-                        <h:outputLabel></h:outputLabel>
                         <a href="">Want to change the date?</a>
-                        <h:outputLabel></h:outputLabel>
                         <h:outputLabel>
                             <h4>Room:</h4>
                         </h:outputLabel>
-                        <h:outputLabel></h:outputLabel>
-                        <h:outputLabel></h:outputLabel>
                         <h:outputText value="#{rname}" id="rname" />
                         <h:outputLabel></h:outputLabel>
-                        <h:outputLabel></h:outputLabel>
-                        <h:outputLabel></h:outputLabel>
                         <a href="">Want to change the room?</a>
-                        <h:outputLabel></h:outputLabel>
                     </h:panelGrid>
                 </h:form>
             </div>
