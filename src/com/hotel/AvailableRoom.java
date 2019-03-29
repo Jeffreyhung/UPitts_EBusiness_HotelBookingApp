@@ -11,6 +11,7 @@ public class AvailableRoom {
 	private String startDate;
 	private String endDate;
 	private int numOfPeople;
+	private int selectedRid;
 	
 	public String getStartDate() {
 		return startDate;
@@ -36,6 +37,14 @@ public class AvailableRoom {
 		this.numOfPeople = numOfPeople;
 	}
 	
+	public int getSelectedRid() {
+		return selectedRid;
+	}
+	
+	public void setSelectedRid(int selectedRid) {
+		this.selectedRid = selectedRid;
+	}
+
 	public List<Room> getRooms() throws ClassNotFoundException, SQLException {
 		Connection connect = null;
 	

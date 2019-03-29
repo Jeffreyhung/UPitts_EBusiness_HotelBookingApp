@@ -2,16 +2,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" 	xmlns:f="http://java.sun.com/jsf/core" 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
-	<title>JSF Test</title>
-
+	<title>Available Rooms</title>
 </h:head>
 <h:body>
 	<h2>Room Info</h2>
 	Start Date: #{availableRoom.startDate} End Date: #{availableRoom.endDate}<br/>
 	Number of People: #{availableRoom.numOfPeople}
-	
+	<h:form>
 	<h:dataTable value="#{availableRoom.rooms}" var="room" border="2">
-		<h:column>
+		<h:column rendered="false">
 			<f:facet name="header">Room ID</f:facet>
          #{room.rid}
       </h:column>
@@ -20,17 +19,21 @@
          #{room.rname}
       </h:column>
 		<h:column>
-			<f:facet name="header">Room capacity</f:facet>
+			<f:facet name="header">Capacity</f:facet>
            #{room.rcapacity}
        </h:column>
 		<h:column>
-			<f:facet name="header">Room beds</f:facet>
+			<f:facet name="header">Beds</f:facet>
            #{room.rbeds}
        </h:column>
 		<h:column>
-			<f:facet name="header">Room price</f:facet>
+			<f:facet name="header">Price</f:facet>
            #{room.rprice}
        </h:column>
+       <h:column style="text-align: center">
+            <h:commandButton action="#{bookingInfo.addRoom(room.rid, availableRoom.startDate, availableRoom.endDate)}" value="Select" />
+        </h:column>
 	</h:dataTable>
+	</h:form>
 </h:body>
 </html>

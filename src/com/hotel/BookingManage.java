@@ -8,4 +8,10 @@ import java.util.List;
 @ManagedBean(name="bookingManage")
 public class BookingManage {
 	
+	public String addBooking() {
+		
+		
+		return "confirmation?faces-redirect=true";
+	}
+	
 }
