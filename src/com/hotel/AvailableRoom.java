@@ -84,4 +84,8 @@ public class AvailableRoom {
 		return rooms;
 
 	}
+
+	public String run() {
+		return "availableRooms?faces-redirect=true&includeViewParams=true";
+	}
 }

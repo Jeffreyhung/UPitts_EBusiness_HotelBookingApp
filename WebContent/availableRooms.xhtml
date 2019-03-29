@@ -3,10 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" 	xmlns:f="http://java.sun.com/jsf/core" 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
 	<title>Available Rooms</title>
+        <f:view>
+         <f:metadata>
+             <f:viewParam id="startDate" name="startDate" value="#{availableRoom.startDate}" required="true"/>
+             <f:viewParam id="endDate" name="endDate" value="#{availableRoom.endDate}" required="true"/>
+             <f:viewParam id="numOfPeople" name="numOfPeople" value="#{availableRoom.numOfPeople}" required="true"/>
+   		</f:metadata>
+    </f:view>
 </h:head>
 <h:body>
 	<h2>Room Info</h2>
-	Start Date: #{availableRoom.startDate} End Date: #{availableRoom.endDate}<br/>
+	#{availableRoom.startDate} #{availableRoom.endDate}
 	Number of People: #{availableRoom.numOfPeople}
 	<h:form>
 	<h:dataTable value="#{availableRoom.rooms}" var="room" border="2">

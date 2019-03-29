@@ -12,6 +12,7 @@ public class BookingManage {
 	private String startDate;
 	private String endDate;
 	private BookingInfo bookingInfo;
+	private Room room;
 	
 	public BookingManage() {}
 	
@@ -23,6 +24,13 @@ public class BookingManage {
 		this.bookingInfo = bookingInfo;
 	}
 	
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+	
+	public Room getRoom() {
+		return room;
+	}
 	
 	public int getRid() {
 		return rid;
@@ -44,31 +52,51 @@ public class BookingManage {
 		this.startDate = startDate;
 	}
 	
-	public void setEndDate() {
-		
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 	
 	public String select(int rid, String startDate, String endDate) {
-//		System.out.println(rid);
 		this.rid = rid;
-//		this.bookingInfo.setRid(this.rid);
-		System.out.print(rid + startDate+ endDate);
 		this.startDate = startDate;
-//		this.bookingInfo.setStartDate(this.startDate);
 		this.endDate = endDate;	
-//		this.bookingInfo.setEndDate(this.endDate);
-	    return "order";
+	    return "order?faces-redirect=true&includeViewParams=true";
 	}
 	
-	public void onload() {
-		System.out.println("onload success");
-		System.out.println(this.rid);
-		System.out.println(this.startDate);
-		System.out.println(this.endDate);
+	public void onload()  throws ClassNotFoundException, SQLException {
+		Connection connect = null;
+		
+		String url = "jdbc:mysql://localhost:3306/hotel";
+		
+		String username = "root";
+		String password = "root";
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			connect = DriverManager.getConnection(url, username, password);
+		} catch (SQLException ex) {
+			System.out.println("in exec");
+			System.out.println(ex.getMessage());
+		}
+		PreparedStatement pstmt = connect.prepareStatement("SELECT RID, Name, Capacity, NumOfBeds, Price FROM room WHERE RID = ?");
+		pstmt.setInt(1, getRid());
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			Room temp  = new Room();
+			temp.setRid(rs.getInt("RID"));
+			temp.setRname(rs.getString("Name"));
+			temp.setRcapacity(rs.getInt("Capacity"));
+			temp.setRbeds(rs.getInt("NumOfBeds"));
+			temp.setRprice(rs.getInt("Price"));
+			setRoom(temp);
+		}
+		rs.close();
+		pstmt.close();
+		connect.close();
 	}
 	
 	public String addBooking() {
-		return "confirmation?faces-redirect=true";
+		return "confirmation?faces-redirect=true&includeViewParams=true";
 	}
 	
 }
