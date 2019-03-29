@@ -2,8 +2,6 @@ package com.hotel;
 
 import javax.faces.bean.ManagedBean;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @ManagedBean(name="bookingManage")
 public class BookingManage {
@@ -95,8 +93,11 @@ public class BookingManage {
 		connect.close();
 	}
 	
-	public String addBooking() {
-		return "confirmation?faces-redirect=true&includeViewParams=true";
+	public String addBooking(Customer customer) {
+		System.out.println("TEST2");
+		
+//		return "confirmation?faces-redirect=true";
+		return "True";
 	}
 	
 }

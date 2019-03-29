@@ -1,5 +1,8 @@
 package com.hotel;
 
+import javax.faces.bean.ManagedBean;
+
+@ManagedBean
 public class Customer {
 	private int cid;
 	private String bookingName;

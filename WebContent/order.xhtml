@@ -37,7 +37,7 @@
                     <h3>Order Details</h3>
                 </div>
                 <h:messages globalOnly="true" />
-                <h:form id="form2" style="margin-top: 10px;">
+                <h:form id="roomInfo" style="margin-top: 10px;">
                     <h:panelGrid columns="2">
                         <h:outputLabel>
                             <h4>Check in:</h4>
@@ -69,7 +69,7 @@
                     <h3>Input Your Information</h3>
                 </div>
                 <h:messages globalOnly="true" />
-                <h:form id="form" style="margin-top: 10px;">
+                <h:form id="customerInfo" style="margin-top: 10px;">
                     <h:panelGrid columns="3">
                         <h:outputLabel>FirstName:</h:outputLabel>
                         <h:inputText value="#{customer.firstName}" id="firstName" />
@@ -86,7 +86,7 @@
                         <h:outputLabel>Address:</h:outputLabel>
                         <h:inputText value="#{customer.address}" id="address" required="true" requiredMessage="Your address is mandatory." />
                         <h:message for="address" />
-                        <h:commandButton value="Submit" styleClass="save" />
+                        <h:commandButton value="Submit" styleClass="save" action="#{bookingManage.addBooking(customer)}"/>
                     </h:panelGrid>
                 </h:form>
             </div>

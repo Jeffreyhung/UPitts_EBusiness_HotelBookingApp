@@ -1,5 +1,8 @@
 package com.hotel;
 
+import javax.faces.bean.ManagedBean;
+
+@ManagedBean
 public class Room {
 
 	private Integer rid;
