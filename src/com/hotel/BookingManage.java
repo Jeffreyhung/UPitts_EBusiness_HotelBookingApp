@@ -10,9 +10,17 @@ public class BookingManage {
 	private String startDate;
 	private String endDate;
 	private Room room;
+	private Customer customer;
 	
 	public BookingManage() {}
 	
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	
+	public Customer getCustomer() {
+		return customer;
+	}
 	
 	public void setRoom(Room room) {
 		this.room = room;
@@ -22,30 +30,30 @@ public class BookingManage {
 		return room;
 	}
 	
-	public int getRid() {
-		return rid;
-	}
-	
-	public void setRid(int rid) {
-		this.rid = rid;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
 	}
 	
 	public String getStartDate() {
 		return startDate;
 	}
 	
-	public String getEndDate() {
-		return endDate;
-	}
-	
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
-	}
-	
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 	
+	public String getEndDate() {
+		return endDate;
+	}
+	
+	public void setRid(int rid) {
+		this.rid = rid;
+	}
+	
+	public int getRid() {
+		return rid;
+	}
+		
 	public String select(int rid, String startDate, String endDate) {
 		this.rid = rid;
 		this.startDate = startDate;
@@ -55,7 +63,8 @@ public class BookingManage {
 	
 	public void onload()  throws ClassNotFoundException, SQLException {
 		Connection connect = connectDB();
-		PreparedStatement pstmt = connect.prepareStatement("SELECT RID, Name, Capacity, NumOfBeds, Price FROM room WHERE RID = ?");
+	// Get Room info
+		PreparedStatement pstmt = connect.prepareStatement("SELECT * FROM room WHERE RID = ?");
 		pstmt.setInt(1, getRid());
 		ResultSet rs = pstmt.executeQuery();
 		while (rs.next()) {
@@ -65,7 +74,7 @@ public class BookingManage {
 			temp.setRcapacity(rs.getInt("Capacity"));
 			temp.setRbeds(rs.getInt("NumOfBeds"));
 			temp.setRprice(rs.getInt("Price"));
-			setRoom(temp);
+			this.setRoom(temp);
 		}
 		rs.close();
 		pstmt.close();
@@ -73,12 +82,12 @@ public class BookingManage {
 	}
 	
 	public String addBooking(Customer cust) throws ClassNotFoundException, SQLException{
-		Customer customer = cust;
+		setCustomer(cust);
 		int customerID = 0;
 		int bookingID = 0;
 		Connection connect = connectDB();
 		
-		// Get customer ID
+	// Get customer ID
 		PreparedStatement pstmt = connect.prepareStatement("SELECT MAX(cid) FROM customer");
 		ResultSet rs = pstmt.executeQuery();
 		while (rs.next()) {
@@ -87,7 +96,7 @@ public class BookingManage {
 		rs.close();
 		pstmt.close();
 		customer.setCid(customerID);
-		// Add value to customer table
+	// Add value to customer table
 		PreparedStatement pstmt2 = connect.prepareStatement("INSERT INTO customer VALUES (?, ?, ?, ?, ?, ?, ?) ");
 		pstmt2.setInt(1, customer.getCid());
 		pstmt2.setString(2, customer.getBookingName());
@@ -98,29 +107,28 @@ public class BookingManage {
 		pstmt2.setString(7, customer.getEmail());
 		pstmt2.executeUpdate();
 		pstmt2.close();
-		// Get customer ID
-		PreparedStatement pstmt4 = connect.prepareStatement("SELECT MAX(bid) FROM bookinginfo");
-		ResultSet rs2 = pstmt4.executeQuery();
+	// Get booking ID
+		PreparedStatement pstmt3 = connect.prepareStatement("SELECT MAX(bid) FROM bookinginfo");
+		ResultSet rs2 = pstmt3.executeQuery();
 		while (rs2.next()) {
 			bookingID = rs2.getInt("MAX(bid)")+1;
 		}
-		rs.close();
-		pstmt4.close();
-		// Add value to bookingInfo table
-		PreparedStatement pstmt3 = connect.prepareStatement("INSERT INTO bookinginfo VALUES (?, ?, ?, ?, ?) ");
-		pstmt3.setInt(1, bookingID);
-		pstmt3.setInt(2, customer.getCid());
-		pstmt3.setInt(3, rid);
-		pstmt3.setString(4, startDate);
-		pstmt3.setString(5, endDate);
-		pstmt3.executeUpdate();
+		rs2.close();
 		pstmt3.close();
-		
+	// Add value to bookingInfo table
+		PreparedStatement pstmt4 = connect.prepareStatement("INSERT INTO bookinginfo VALUES (?, ?, ?, ?, ?) ");
+		pstmt4.setInt(1, bookingID);
+		pstmt4.setInt(2, customer.getCid());
+		pstmt4.setInt(3, rid);
+		pstmt4.setString(4, startDate);
+		pstmt4.setString(5, endDate);
+		pstmt4.executeUpdate();
+		pstmt4.close();
 		connect.close();
-		
-		
-//		return "confirmation?faces-redirect=true";
-		return "True";
+	// Get room info
+		onload();
+	//redirect to confirmation page
+		return "confirmation";
 	}
 	
 	private Connection connectDB()  throws ClassNotFoundException{
