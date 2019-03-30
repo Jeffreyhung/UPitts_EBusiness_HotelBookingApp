@@ -12,38 +12,32 @@
     </f:view>
 </h:head>
 <h:body>
-	<p:outputLabel value="Room Info" />
-	<h2>Room Info</h2>
-	#{availableRoom.startDate} #{availableRoom.endDate}
-	Number of People: #{availableRoom.numOfPeople}
+	<p:outputLabel value="Room Info" /><br/>
+	<p:outputLabel value="#{availableRoom.startDate} to #{availableRoom.endDate}" /><br/>
+	<p:outputLabel value="Number of People: #{availableRoom.numOfPeople}" /><br/>
 	<h:form>
 	<p:dataTable  value="#{availableRoom.rooms}" var="room" border="2">
 		<p:column rendered="false">
-			<f:facet name="header">Room ID</f:facet>
-         #{room.rid}
+			<f:facet name="header">Room ID</f:facet> #{room.rid}
       </p:column>
 		<p:column>
-			<f:facet name="header">Room Name</f:facet>
-         #{room.rname}
+			<f:facet name="header">Room Name</f:facet> #{room.rname}
       </p:column>
 		<p:column>
-			<f:facet name="header">Capacity</f:facet>
-           #{room.rcapacity}
+			<f:facet name="header">Capacity</f:facet> #{room.rcapacity}
        </p:column>
 		<p:column>
-			<f:facet name="header">Beds</f:facet>
-           #{room.rbeds}
+			<f:facet name="header">Beds</f:facet> #{room.rbeds}
        </p:column>
 		<p:column>
-			<f:facet name="header">Price</f:facet>
-           #{room.rprice}
+			<f:facet name="header">Price</f:facet> #{room.rprice}
        </p:column>
        <p:column style="text-align: center">
-            <h:commandButton action="#{bookingManage.select(room.rid, availableRoom.startDate, availableRoom.endDate)}" value="Select" >
+            <p:commandButton action="#{bookingManage.select(room.rid, availableRoom.startDate, availableRoom.endDate)}" value="Select" >
             	<f:param name="rid" value="#{room.rid}"/>
             	<f:param name="startDate" value="#{availableRoom.startDate}"/>
             	<f:param name="endDate" value="#{availableRoom.endDate}"/>
-            </h:commandButton>
+            </p:commandButton>
         </p:column>
 	</p:dataTable>
 	</h:form>
