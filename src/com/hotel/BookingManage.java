@@ -93,8 +93,9 @@ public class BookingManage {
 		connect.close();
 	}
 	
-	public String addBooking(Customer customer) {
-		System.out.println("TEST2");
+	public String addBooking(Customer cust) {
+		Customer customer = cust;
+		
 		
 //		return "confirmation?faces-redirect=true";
 		return "True";

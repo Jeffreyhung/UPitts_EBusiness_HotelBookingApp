@@ -2,8 +2,11 @@ package com.hotel;
 
 import javax.faces.bean.ManagedBean;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @ManagedBean(name="availableRoom")
 public class AvailableRoom {
@@ -12,6 +15,7 @@ public class AvailableRoom {
 	private String endDate;
 	private int numOfPeople;
 	private int selectedRid;
+	private List<Date> range;
 	
 	public String getStartDate() {
 		return startDate;
@@ -45,6 +49,17 @@ public class AvailableRoom {
 		this.selectedRid = selectedRid;
 	}
 
+	public List<Date> getRange() {
+        return range;
+    }
+ 
+    public void setRange(List<Date> range) {
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    	setStartDate(sdf.format(range.get(0)));
+    	setEndDate(sdf.format(range.get(1)));
+        this.range = range;
+    }
+	
 	public List<Room> getRooms() throws ClassNotFoundException, SQLException {
 		Connection connect = null;
 	
