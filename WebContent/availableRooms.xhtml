@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/image/icon.png" />
+    <h:outputStylesheet library="css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="css" name="roomLookup.css" />
+    <h:outputScript library="js" name="script.js" />
+    <title>Available Rooms</title>
+    <f:view>
+        <f:metadata>
+            <f:viewParam id="startDate" name="startDate" value="#{availableRoom.startDate}" required="true" />
+            <f:viewParam id="endDate" name="endDate" value="#{availableRoom.endDate}" required="true" />
+            <f:viewParam id="numOfPeople" name="numOfPeople" value="#{availableRoom.numOfPeople}" required="true" />
+        </f:metadata>
+    </f:view>
+</h:head>
+<h:body>
+    <section class="element-full">
+        <section class="head-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6">
+                        <h:graphicImage library="image" name="icon.png" class="img-responsive" />
+                    </div>
+                    <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right">
+                        <div id="mySidenav" class="sidenav text-center">
+                            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br />
+                            <h:link value="Home" outcome="index" />
+                            <hr />
+                            <h:link value="Sign In" outcome="signIn" />
+                            <hr />
+                            <h:link value="Sign Up" outcome="signUp" />
+                        </div>
+                        <div class="main" id="main">
+                            <a href="#" onclick="openNav()">MENU &#9776;</a>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            </div>
+        </section>
+        <section class="element-page"  style="margin-bottom: 50px ">
+            <div class="container">
+            	<h2 class="text-center">Available Rooms</h2>
+                <hr class="hr-mid" />
+                <p class="text-center">
+                	<p:outputLabel value="#{availableRoom.startDate} to #{availableRoom.endDate}" styleclass="text-center"/><br/>
+                	<p:outputLabel value="#{availableRoom.numOfPeople} People" styleclass="text-center"/>
+                </p>
+                <h:form style="width:80%; margin:auto" >
+                    <p:dataTable value="#{availableRoom.rooms}" var="room" border="2" styleclass="table">
+                        <p:column rendered="false">
+                            <f:facet name="header">Room ID</f:facet> #{room.rid}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Name</f:facet> #{room.rname}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Capacity</f:facet> #{room.rcapacity}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Beds</f:facet> #{room.rbeds}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Price</f:facet> #{room.rprice}
+                        </p:column>
+                        <p:column style="text-align: center">
+                        	<f:facet name="header">Price</f:facet>
+                            <p:commandButton action="#{bookingManage.select(room.rid, availableRoom.startDate, availableRoom.endDate)}" value="Select">
+                                <f:param name="rid" value="#{room.rid}" />
+                                <f:param name="startDate" value="#{availableRoom.startDate}" />
+                                <f:param name="endDate" value="#{availableRoom.endDate}" />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </div>
+        </section>
+        <section class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="footer-p1">
+                            <p class="font-2">Copy right 2016 by wow technology</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="footer-p2">
+                            <p class="font-2">UPitts 2019 E-business Project</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</h:body>
+
+</html>

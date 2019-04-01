@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 	xmlns:f="http://java.sun.com/jsf/core" 	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=BIG5" />
+	<title>Confirmation</title>
+</h:head>
+<h:body>
+	<table style="width:100%">
+		<tr>
+			<td>Date: </td>
+			<td>#{bookingManage.startDate} - #{bookingManage.endDate}</td> 
+		</tr>
+		<tr>
+			<td>Room:</td>
+			<td>#{bookingManage.room.rname}</td>
+		</tr>
+		<tr>
+			<td>Price:</td>
+			<td>#{bookingManage.room.rprice}</td>
+		</tr>
+		<tr>
+			<td>Booking Name:</td>
+			<td>#{bookingManage.customer.bookingName}</td>
+		</tr>
+		<tr>
+			<td>First Name:</td>
+			<td>#{bookingManage.customer.firstName}</td>
+		</tr>
+		<tr>
+			<td>Last Name:</td>
+			<td>#{bookingManage.customer.lastName}</td>
+		</tr>
+		<tr>
+			<td>Phone:</td>
+			<td>#{bookingManage.customer.phone}</td>
+		</tr>
+		<tr>
+			<td>Address:</td>
+			<td>#{bookingManage.customer.address}</td>
+		</tr>
+		<tr>
+			<td>Email:</td>
+			<td>#{bookingManage.customer.email}</td>
+		</tr>
+		
+	</table>
+</h:body>
+</html>

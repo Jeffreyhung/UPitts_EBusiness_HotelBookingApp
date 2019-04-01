@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15536446270940" configfile="/HotelBookingApp/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="order.xhtml" x="122" y="178" id="pf15538052588300" referenceLink="//@navigationRule.0/@fromViewId|" path="/order.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.html" x="122" y="562" id="pf15538052588302" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" path="/index.html"/>
+  <nodes xsi:type="pageflow:PFPage" name="roomLookup.xhtml" x="122" y="946" id="pf15538220326154" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf15538220326155" path="/roomLookup.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="availableRooms.xhtml" x="338" y="946" id="pf15538220326156" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf15538220326155" path="/availableRooms.xhtml"/>
+  <links id="pf15538220326155" target="pf15538220326156" source="pf15538220326154" outcome="lookup" fromaction="#{availableRoom.execute()}"/>
+</pageflow:Pageflow>

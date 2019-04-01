@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/image/icon.png" />
+    <h:outputStylesheet library="css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="css" name="roomLookup.css" />
+    <h:outputScript library="js" name="script.js" />
+    <title>Room Lookup</title>
+</h:head>
+<h:body>
+    <section class="element-full">
+        <section class="head-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6">
+                        <h:graphicImage library="image" name="icon.png" class="img-responsive" />
+                    </div>
+                    <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right">
+                        <div id="mySidenav" class="sidenav text-center">
+                            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br />
+                            <h:link value="Home" outcome="index" />
+                            <hr />
+                            <h:link value="Sign In" outcome="signIn" />
+                            <hr />
+                            <h:link value="Sign Up" outcome="signUp" />
+                        </div>
+                        <div class="main" id="main">
+                            <a href="#" onclick="openNav()">MENU &#9776;</a>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            </div>
+        </section>
+        <section class="element-page">
+            <div class="container">
+                <h2 class="text-center">Find Rooms</h2>
+                <hr class="hr-mid" />
+                <h:form class="form-horizontal">
+                    <h4>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-lg-6 col-md-6 col-sm-6 col-xs-6 control-label">Select Date</label>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                <p:datePicker id="datePicker" selectionMode="range" value="#{availableRoom.range}" readonlyInput="true" style="width:20px" required="true" requiredMessage="Please select the date" validator="#{availableRoom.validateDate}" />
+                            </div>
+                        </div>
+                        <h:message for="datePicker" styleClass="error" />
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-lg-6 col-md-6 col-sm-6 col-xs-6 control-label">Number of People</label>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                <p:selectOneMenu id="numOfPeople" value="#{availableRoom.numOfPeople}" style="width:200px" required="true" styleClass="select" validator="#{availableRoom.validateNum}">
+                                    <f:selectItem itemLabel="1" itemValue="1" styleClass="option" />
+                                    <f:selectItem itemLabel="2" itemValue="2" styleClass="option" />
+                                    <f:selectItem itemLabel="3" itemValue="3" styleClass="option" />
+                                    <f:selectItem itemLabel="4" itemValue="4" styleClass="option" />
+                                </p:selectOneMenu>
+                            </div>
+                        </div>
+                        <h:message for="numOfPeople" styleClass="error" />
+                        <div style="width:300px; margin: auto;">
+                            <h4>
+                                <h:commandButton value="Search" action="#{availableRoom.run()}" styleClass="btn btn-default call-btn-1" required="true">
+                                    <f:param name="startDate" value="#{availableRoom.startDate}" />
+                                    <f:param name="endDate" value="#{availableRoom.endDate}" />
+                                    <f:param name="numOfPeople" value="#{availableRoom.numOfPeople}" />
+                                </h:commandButton>
+                            </h4>
+                        </div>
+                    </h4>
+                </h:form>
+            </div>
+            <div>
+                <section class="row" style="margin-right: 20px; margin-left: 20px; margin-bottom: 50px ">
+                    <div class="col-lg-4 col-xs-12 col-sm-12 col-md-4">
+                        <h:graphicImage library="image" name="ny.png" class="img-responsive" />
+                    </div>
+                    <div class="col-lg-4 col-xs-12 col-sm-12 col-md-4">
+                        <h:graphicImage library="image" name="sf.png" class="img-responsive" />
+                    </div>
+                    <div class="col-lg-4 col-xs-12 col-sm-12 col-md-4">
+                        <h:graphicImage library="image" name="tokyo.png" class="img-responsive" />
+                    </div>
+                </section>
+            </div>
+        </section>
+        <section class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="footer-p1">
+                            <p class="font-2">Copy right 2016 by wow technology</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="footer-p2">
+                            <p class="font-2">UPitts 2019 E-business Project</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</h:body>
+
+</html>
