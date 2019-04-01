@@ -1,12 +1,20 @@
 package com.hotel;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
+
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+import java.util.Date;
 
 @ManagedBean(name="availableRoom")
 public class AvailableRoom {
@@ -103,4 +111,29 @@ public class AvailableRoom {
 	public String run() {
 		return "availableRooms?faces-redirect=true&includeViewParams=true";
 	}
+	
+	public void validateDate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
+		if (value == null) return;
+		String data = value.toString();
+//		List<Date> date = (List<Date>) value;
+		try {
+			List<Date> date = (List<Date>) value;
+		}catch(IllegalArgumentException e) {
+			FacesMessage message = new FacesMessage("Invalid input of Date");
+			throw new ValidatorException(message);
+		}
+	}
+	
+	public void validateNum(FacesContext context, UIComponent component, Object value) throws ValidatorException {
+
+		if (value == null) return;
+		
+		int data = (int) value;
+		
+		if (data > 4 || data < 1) {
+			FacesMessage message = new FacesMessage("Invalid number of People");
+			throw new ValidatorException(message);
+		}
+	}
+	
 }
