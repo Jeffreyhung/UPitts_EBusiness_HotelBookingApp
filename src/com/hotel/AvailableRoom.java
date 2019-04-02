@@ -5,11 +5,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -114,8 +109,6 @@ public class AvailableRoom {
 	
 	public void validateDate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 		if (value == null) return;
-		String data = value.toString();
-//		List<Date> date = (List<Date>) value;
 		try {
 			List<Date> date = (List<Date>) value;
 		}catch(IllegalArgumentException e) {
