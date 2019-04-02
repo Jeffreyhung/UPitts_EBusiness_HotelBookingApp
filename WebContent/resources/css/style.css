@@ -81,7 +81,7 @@ body{
     list-style-type: none;
 }
 body {
-    background-color: #fefefe;
+    background-color: #ededed;
     transition: background-color .5s;
     font-family: monospace; 
 }
@@ -332,22 +332,25 @@ i.fa-heart{
     padding-right: 380px;
 }
 .call-btn-1{
+    font-family: 'Poppins', sans-serif;
     border:1px solid black;
     border-radius: 30px;
     width:100%;
     margin-top: 20px;
     padding-top: 18px;
     padding-bottom: 18px;
-    font-size: 12px;
+    font-size: 20px;
+    width:60%;
 }
 .call-btn-2{
+    font-family: 'Poppins', sans-serif;
     border:1px solid black;
-    border-radius: 25px;
+    border-radius: 30px;
     width:100%;
     margin-top: 20px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    font-size: 12px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    font-size: 20px;
 }
 .call-btn-3{
     border:1px solid black;
@@ -374,14 +377,15 @@ i.fa-heart{
 }
 
 input,select,textarea{
-     width: 100%;
+    width: 100%;
     border:1px solid black;
     border-radius: 30px;
     font-family: 'Lora', serif;
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 35px;
-    margin-bottom: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 textarea{
     padding-top: 28px;
@@ -449,6 +453,12 @@ textarea{
     color: black;
     font-size: 14px;
 }
+@media (max-width: 768px) {
+  .col-xs-12 {
+          text-align: center;
+   } 
+}
+
 @media screen and (min-width: 481px) and (max-width: 1200px) {
 
    .block{

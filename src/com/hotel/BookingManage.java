@@ -103,7 +103,7 @@ public class BookingManage {
 		pstmt2.setString(3, customer.getFirstName());
 		pstmt2.setString(4, customer.getLastName());
 		pstmt2.setString(5, customer.getAddress());
-		pstmt2.setString(6, Integer.toString(customer.getPhone()));
+		pstmt2.setString(6, customer.getPhone());
 		pstmt2.setString(7, customer.getEmail());
 		pstmt2.executeUpdate();
 		pstmt2.close();

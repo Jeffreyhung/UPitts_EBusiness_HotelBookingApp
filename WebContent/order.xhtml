@@ -1,107 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" 	xmlns:f="http://java.sun.com/jsf/core" 	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	<title>Order</title>
-    <h:outputStylesheet library="css" name="order.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/image/icon.png" />
+    <h:outputStylesheet library="css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="css" name="style.css" />
+    <h:outputScript library="js" name="script.js" />
+    <title>Order Detail</title>
     <f:view>
-         <f:metadata>
-             <f:viewParam id="rid" name="roomid" value="#{bookingManage.rid}" required="true"/>
-             <f:viewParam id="startDate" name="startDate" value="#{bookingManage.startDate}" required="true"/>
-             <f:viewParam id="endDate" name="endDate" value="#{bookingManage.endDate}" required="true"/>
-             <f:event type="preRenderView" listener="#{bookingManage.onload}" />
-   		</f:metadata>
+        <f:metadata>
+            <f:viewParam id="rid" name="roomid" value="#{bookingManage.rid}" required="true" />
+            <f:viewParam id="startDate" name="startDate" value="#{bookingManage.startDate}" required="true" />
+            <f:viewParam id="endDate" name="endDate" value="#{bookingManage.endDate}" required="true" />
+            <f:event type="preRenderView" listener="#{bookingManage.onload}" />
+        </f:metadata>
     </f:view>
 </h:head>
 <h:body>
-    <div id="wrapper">
-        <div id="header" class="row">
-            <div class="col-sm-6 text-left">
-                <h1>Enter your details</h1>
-            </div>
-            <div class="col-sm-6 text-right"><a href="">
-                    <font color="white">
-                        Sign in/up
-                    </font>
-                </a></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-5" style="background-color:rgba(50,50,50,0.1);">
-            <div id="container">
-                <div class="text-center">
-                    <h3>Order Details</h3>
+    <section class="element-full">
+        <section class="head-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6">
+                        <h:graphicImage library="image" name="icon.png" class="img-responsive" />
+                    </div>
+                    <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right">
+                        <div id="mySidenav" class="sidenav text-center">
+                            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br />
+                            <h:link value="Home" outcome="index" />
+                            <hr />
+                            <h:link value="Sign In" outcome="signIn" />
+                            <hr />
+                            <h:link value="Sign Up" outcome="signUp" />
+                        </div>
+                        <div class="main" id="main">
+                            <a href="#" onclick="openNav()">MENU &#9776;</a>
+                        </div>
+                    </div>
                 </div>
-                <h:messages globalOnly="true" />
-                <h:form id="roomInfo" style="margin-top: 10px;">
-                    <h:panelGrid columns="2">
-                        <h:outputLabel>
-                            <h4>Check in:</h4>
-                        </h:outputLabel>
-                        <h:outputText value="#{bookingManage.startDate}" id="ckDate" />
-                        <h:outputLabel>
-                            <h4>Check out:</h4>
-                        </h:outputLabel>
-                        <h:outputText value="#{bookingManage.endDate}" id="coDate" />
-                        <h:outputLabel></h:outputLabel>
-                        <a href="#" onclick="history.go(-2)">Want to change the date?</a>
-                        <h:outputLabel>
-                            <h4>Prices</h4>
-                        </h:outputLabel>
-                        <h:outputText value="#{bookingManage.room.rprice}" id="days" />
-                        <h:outputLabel>
-                            <h4>Room:</h4>
-                        </h:outputLabel>
-                        <h:outputText value="#{bookingManage.room.rname}" id="rname" />
-                        <h:outputLabel></h:outputLabel>
-                        <a href="javascript:history.back()">Want to change the room?</a>
-                    </h:panelGrid>
-                </h:form>
+                <hr />
             </div>
-        </div>
-        <div class="col-sm-7">
-            <div id="container">
-                <div class="text-center">
-                    <h3>Input Your Information</h3>
-                </div>
-                <h:messages globalOnly="true" />
+        </section>
+        <section class="element-page" style="margin-bottom:100px;">
+            <div class="container" style="width:80%; margin:auto ">
+                <h2 class="text-center">Order Detail</h2>
+                <hr class="hr-mid" />
+                <h3 class="text-center">
+                    #{bookingManage.startDate} to #{bookingManage.endDate}<br />
+                    <h4 class="text-center"><a href="#" onclick="history.go(-2)">Want to change the date?</a></h4>
+                </h3>
+                <h3 class="text-center">
+                    #{bookingManage.room.rname} ● $#{bookingManage.room.rprice} / Night<br />
+                    <h4 class="text-center"><a href="javascript:history.back()">Want to change the room?</a></h4>
+                </h3>
+            </div>
+            <hr class="line-full" style="width:80%"/>
+            <div class="container" style="width:80%; margin:auto ">
+                <h2 class="text-center">Input Your Information</h2>
+                <hr class="hr-mid" />
                 <h:form id="customerInfo" style="margin-top: 10px;">
-                    <h:panelGrid columns="3">
-                    	<h:outputLabel>Booking Name:</h:outputLabel>
-                        <h:inputText value="#{customer.bookingName}" id="bookingName" />
-                        <h:message for="bookingName" />
-                        <h:outputLabel>First Name:</h:outputLabel>
-                        <h:inputText value="#{customer.firstName}" id="firstName" />
-                        <h:message for="firstName" />
-                        <h:outputLabel>Last Name:</h:outputLabel>
-                        <h:inputText value="#{customer.lastName}" id="lastName" />
-                        <h:message for="lastName" />
-                        <h:outputLabel>Email:</h:outputLabel>
-                        <h:inputText value="#{customer.email}" id="email" required="true" requiredMessage="Your email is mandatory." />
-                        <h:message for="email" />
-                        <h:outputLabel>Phone:</h:outputLabel>
-                        <h:inputText value="#{customer.phone}" id="phone" required="true" requiredMessage="Your phone is mandatory." />
-                        <h:message for="phone" />
-                        <h:outputLabel>Address:</h:outputLabel>
-                        <h:inputText value="#{customer.address}" id="address" required="true" requiredMessage="Your address is mandatory." />
-                        <h:message for="address" />
-                        <h:commandButton value="Submit" styleClass="save" action="#{bookingManage.addBooking(customer)}"/>
-                    </h:panelGrid>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-md-3">
+                                <h3>Booking Name:</h3>
+                            </div>
+                            <div class="col-xs-12 col-md-9">
+                                <h:inputText value="#{customer.bookingName}" 
+                                	id="bookingName"
+									required="true" 
+                                	requiredMessage="Booking Name is mandatory." 
+                                	a:placeholder="Name for the one Booking the rooms" />
+                                <h:message for="bookingName" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="col-xs-12 col-md-5">
+                                <h3>First Name:</h3>
+                            </div>
+                            <div class="col-xs-12 col-md-7">
+                                <h:inputText value="#{customer.firstName}" 
+                                	id="firstName"
+									required="true" 
+                                	requiredMessage="First Name is mandatory." 
+                                	a:placeholder="First Name" />
+                                <h:message for="firstName" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="col-xs-12 col-md-5">
+                                <h3>Last Name:</h3>
+                                <h:message for="lastName" />
+                            </div>
+                            <div class="col-xs-12 col-md-7">
+                                <h:inputText value="#{customer.lastName}" 
+                                	id="lastName"
+									required="true" 
+                                	requiredMessage="Last Name is mandatory." 
+                                	a:placeholder="Last Name" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="col-xs-12 col-md-5">
+                                <h3>Email:</h3>
+                            </div>
+                            <div class="col-xs-12 col-md-7">
+                                <h:inputText value="#{customer.email}" 
+                                	id="email" 
+                                	required="true" 
+                                	requiredMessage="Your email is mandatory." 
+                                	a:placeholder="Your Email Address" />
+                                <h:message for="email" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="col-xs-12 col-md-5">
+                                <h3>Phone:</h3>
+                            </div>
+                            <div class="col-xs-12 col-md-7">
+                                <h:inputText value="#{customer.phone}" 
+                                	id="phoneNum"
+									required="true" 
+                                	requiredMessage="Your phone is mandatory." 
+                                	a:placeholder="Your phone number" />
+                                <h:message for="phone" />
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-xs-12 col-md-3">
+                                <h3>Address:</h3>
+                            </div>
+                            <div class="col-xs-12 col-md-9">
+                                <h:inputText value="#{customer.address}" 
+                                	id="address" 
+                                	required="true" 
+                                	requiredMessage="Your address is mandatory."
+									a:placeholder="Your address" />
+                                <h:message for="address" />
+                            </div>
+                        </div>
+                        <div style="text-align:center;">
+                        	<h:commandButton value="Submit" styleClass="btn btn-default call-btn-1" action="#{bookingManage.addBooking(customer)}"/>
+                        </div>
+                    </div>
                 </h:form>
             </div>
-        </div>
-    </div>
-    <p style="margin:20px">
-        <h:form>
-		    <h:button value="Return" outcome="index" />
-		</h:form>
-    </p>
+        </section>
+        <section class="footer" style="margin-top:50px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="footer-p1">
+                            <p class="font-2">Copy right 2016 by wow technology</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="footer-p2">
+                            <p class="font-2">UPitts 2019 E-business Project</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
 </h:body>
 
 </html>

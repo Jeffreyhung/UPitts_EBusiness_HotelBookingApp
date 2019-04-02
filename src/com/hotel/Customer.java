@@ -9,12 +9,12 @@ public class Customer {
 	private String firstName;
 	private String lastName;
 	private String address;
-	private int phone;
+	private String phone;
 	private String email;
 	
 	public Customer() {}
 	
-	public Customer(int cid, String bookingName, String firstName, String lastName, String address, String email, int phone) {
+	public Customer(int cid, String bookingName, String firstName, String lastName, String address, String email, String phone) {
 		this.cid = cid;
 		this.bookingName = bookingName;
 		this.firstName = firstName;
@@ -64,11 +64,11 @@ public class Customer {
 		this.address = address;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 	
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

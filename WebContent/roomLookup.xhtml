@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/image/icon.png" />
     <h:outputStylesheet library="css" name="bootstrap.min.css" />
-    <h:outputStylesheet library="css" name="roomLookup.css" />
+    <h:outputStylesheet library="css" name="style.css" />
     <h:outputScript library="js" name="script.js" />
     <title>Room Lookup</title>
 </h:head>
@@ -62,7 +62,7 @@
                         <h:message for="numOfPeople" styleClass="error" />
                         <div style="width:300px; margin: auto;">
                             <h4>
-                                <h:commandButton value="Search" action="#{availableRoom.run()}" styleClass="btn btn-default call-btn-1" required="true">
+                                <h:commandButton value="Search" action="#{availableRoom.run()}" styleClass="btn btn-default call-btn-2" required="true">
                                     <f:param name="startDate" value="#{availableRoom.startDate}" />
                                     <f:param name="endDate" value="#{availableRoom.endDate}" />
                                     <f:param name="numOfPeople" value="#{availableRoom.numOfPeople}" />
