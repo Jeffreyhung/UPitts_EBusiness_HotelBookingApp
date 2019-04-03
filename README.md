@@ -1,5 +1,3 @@
-Getting started instruction
-
 # Group Member
 Xinran Chen xic96@pitt.edu
 Zhifeng Wang zhw81@pitt.edu
