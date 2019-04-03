@@ -51,7 +51,12 @@
                 	<p:outputLabel value="#{availableRoom.numOfPeople} People" styleclass="text-center"/>
                 </p>
                 <h:form style="width:80%; margin:auto" >
-                    <p:dataTable value="#{availableRoom.rooms}" var="room" border="2" styleclass="table">
+                    <p:dataTable 
+                    		value="#{availableRoom.rooms}" 
+                    		var="room" border="2" 
+                    		styleclass="table text-center" 
+                    		style = "width:100%"
+                    		tableStyle="width:100%;table-layout:auto">
                         <p:column rendered="false">
                             <f:facet name="header">Room ID</f:facet> #{room.rid}
                         </p:column>
@@ -68,8 +73,10 @@
                             <f:facet name="header">Price</f:facet> #{room.rprice}
                         </p:column>
                         <p:column style="text-align: center">
-                        	<f:facet name="header">Price</f:facet>
-                            <p:commandButton action="#{bookingManage.select(room.rid, availableRoom.startDate, availableRoom.endDate)}" value="Select">
+                            <p:commandButton 
+                            		action="#{bookingManage.select(room.rid, availableRoom.startDate, availableRoom.endDate)}" 
+                            		styleClass="btn btn-default call-btn-3" 
+                            		value="Select">
                                 <f:param name="rid" value="#{room.rid}" />
                                 <f:param name="startDate" value="#{availableRoom.startDate}" />
                                 <f:param name="endDate" value="#{availableRoom.endDate}" />

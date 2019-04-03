@@ -100,33 +100,9 @@ public class AvailableRoom {
 		pstmt.close();
 		connect.close();
 		return rooms;
-
 	}
 
 	public String run() {
 		return "availableRooms?faces-redirect=true&includeViewParams=true";
 	}
-	
-	public void validateDate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-		if (value == null) return;
-		try {
-			List<Date> date = (List<Date>) value;
-		}catch(IllegalArgumentException e) {
-			FacesMessage message = new FacesMessage("Invalid input of Date");
-			throw new ValidatorException(message);
-		}
-	}
-	
-	public void validateNum(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-
-		if (value == null) return;
-		
-		int data = (int) value;
-		
-		if (data > 4 || data < 1) {
-			FacesMessage message = new FacesMessage("Invalid number of People");
-			throw new ValidatorException(message);
-		}
-	}
-	
 }

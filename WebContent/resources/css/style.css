@@ -7,6 +7,9 @@ body{
 *{
     outline: none;
 }
+.error{
+	color:red;
+}
 .overlay{
   position: absolute;
   top: 0;
@@ -353,10 +356,10 @@ i.fa-heart{
     font-size: 20px;
 }
 .call-btn-3{
+    font-family: 'Poppins', sans-serif;
     border:1px solid black;
-    border-radius: 25px;
-    width:100%;
-    margin-top: 20px;
+    border-radius: 10px;
+    width:70%;
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 12px;
