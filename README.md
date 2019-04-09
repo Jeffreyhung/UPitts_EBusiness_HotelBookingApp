@@ -1,8 +1,8 @@
 # Group Member
-Xinran Chen xic96@pitt.edu
-Zhifeng Wang zhw81@pitt.edu
-Chi-Heng Hung CHH162@pitt.edu
-Chia-Jung Chang CHC276@pitt.edu
+Xinran Chen xic96@pitt.edu  
+Zhifeng Wang zhw81@pitt.edu  
+Chi-Heng Hung CHH162@pitt.edu  
+Chia-Jung Chang CHC276@pitt.edu  
 
 # Overview
 We build a hotel booking webapp that allows user to search for available rooms for our hotel and book rooms through the webapp.  
