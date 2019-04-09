@@ -17,6 +17,7 @@ public class Validation {
 	public static final Pattern regexEmail = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 	public static final String regexName = "^[a-zA-Z0-9\\s\\-\\.]+$";
 	public static final String regexAddress = "^[a-zA-Z0-9\\s\\-\\.\\,]+$";
+	public static final String regexUsername = "^[a-z]{5,15}$";
 	public Validation() {}
 	
 	public void validateName(FacesContext context, UIComponent component, Object value) throws ValidatorException {
@@ -84,5 +85,24 @@ public class Validation {
 			throw new ValidatorException(message);
 		}
 	}
+	
+	public void validateUsername(FacesContext context, UIComponent component, Object value) throws ValidatorException {
+
+		if (value == null) return;
 		
+		String data = (String) value;
+		int len = data.length();
+;		
+		if (len > 15 ) {
+			FacesMessage message = new FacesMessage("Username length should be shorter than 15 characters");
+			throw new ValidatorException(message);
+		}else if(len < 5) {
+			FacesMessage message = new FacesMessage("Username length should be longer than 5 characters");
+			throw new ValidatorException(message);
+		}else if(!data.matches(regexUsername)) {
+			FacesMessage message = new FacesMessage("Username only allows lowercase alphabets");
+			throw new ValidatorException(message);
+		}
+	}
+	
 }

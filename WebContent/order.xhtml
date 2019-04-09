@@ -4,9 +4,10 @@
 <h:head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" type="image/x-icon" library="image" name="icon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="#{resource['image/icon.png']}"/>
     <h:outputStylesheet library="css" name="bootstrap.min.css" />
     <h:outputStylesheet library="css" name="style.css" />
+    <h:outputScript library="js" name="bootstrap.min.js" />
     <h:outputScript library="js" name="script.js" />
     <title>Order Detail</title>
     <f:view>
@@ -62,20 +63,6 @@
                 <hr class="hr-mid" />
                 <h:form id="customerInfo" style="margin-top: 10px;">
                     <div class="row">
-                        <div class="col-xs-12">
-                            <div class="col-xs-12 col-md-3">
-                                <h3>Booking Name:</h3>
-                            </div>
-                            <div class="col-xs-12 col-md-9">
-                                <h:inputText value="#{customer.bookingName}" 
-                                	id="bookingName"
-									required="true" 
-                                	requiredMessage="Booking Name is mandatory." 
-                                	a:placeholder="Name for the one Booking the rooms" 
-                                	validator="#{validation.validateName}" />
-                                <h:message for="bookingName" styleClass="error" />
-                            </div>
-                        </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="col-xs-12 col-md-5">
                                 <h3>First Name:</h3>

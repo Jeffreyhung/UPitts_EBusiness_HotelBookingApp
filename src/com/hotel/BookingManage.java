@@ -97,14 +97,13 @@ public class BookingManage {
 		pstmt.close();
 		customer.setCid(customerID);
 	// Add value to customer table
-		PreparedStatement pstmt2 = connect.prepareStatement("INSERT INTO customer VALUES (?, ?, ?, ?, ?, ?, ?) ");
+		PreparedStatement pstmt2 = connect.prepareStatement("INSERT INTO customer (CID, FirstName, LastName, Address, PhoneNum, Email)VALUES (?, ?, ?, ?, ?, ?) ");
 		pstmt2.setInt(1, customer.getCid());
-		pstmt2.setString(2, customer.getBookingName());
-		pstmt2.setString(3, customer.getFirstName());
-		pstmt2.setString(4, customer.getLastName());
-		pstmt2.setString(5, customer.getAddress());
-		pstmt2.setString(6, customer.getPhone());
-		pstmt2.setString(7, customer.getEmail());
+		pstmt2.setString(2, customer.getFirstName());
+		pstmt2.setString(3, customer.getLastName());
+		pstmt2.setString(4, customer.getAddress());
+		pstmt2.setString(5, customer.getPhone());
+		pstmt2.setString(6, customer.getEmail());
 		pstmt2.executeUpdate();
 		pstmt2.close();
 	// Get booking ID

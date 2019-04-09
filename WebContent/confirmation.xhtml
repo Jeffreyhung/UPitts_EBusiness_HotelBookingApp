@@ -4,9 +4,10 @@
 <h:head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/image/icon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="#{resource['image/icon.png']}"/>
     <h:outputStylesheet library="css" name="bootstrap.min.css" />
     <h:outputStylesheet library="css" name="style.css" />
+    <h:outputScript library="js" name="bootstrap.min.js" />
     <h:outputScript library="js" name="script.js" />
     <title>Confirmation</title>
 </h:head>
@@ -43,7 +44,6 @@
                     #{bookingManage.startDate} to #{bookingManage.endDate}<br /><br />
                     #{bookingManage.room.rname} ● $#{bookingManage.room.rprice} / Night<br /><br />
                     <hr class="hr-mid" />
-                    Booking Name: #{bookingManage.customer.bookingName}<br /><br />
                     #{bookingManage.customer.firstName}  #{bookingManage.customer.lastName}<br /><br />
                     Phone: #{bookingManage.customer.phone}<br /><br />
                     Email: #{bookingManage.customer.email}<br /><br />
