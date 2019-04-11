@@ -1,6 +1,7 @@
 package com.hotel;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Date;
 
 @ManagedBean(name="availableRoom")
+@ApplicationScoped
 public class AvailableRoom {
 	
 	private String startDate;

@@ -13,12 +13,18 @@
     <h:outputScript library="js" name="sha256.js" />
     <h:outputScript target="head">
     	function check(){
+    		var pwError = document.getElementById("password_error");
 		    var password = document.getElementById("signUp:password");
-		    var password_reg = new RegExp("^[a-z]{5,15}$");
+		    var password_reg = new RegExp("^[a-zA-Z0-9]{8,15}$");
 		    var match = password_reg.test(password.value);
-			
-		    var hash = CryptoJS.SHA256(password.value);    		
-    		
+		    if(match){
+		    	var hash = CryptoJS.SHA256(password.value);
+		    	password.value = hash;
+		    	return true;
+		    }else{
+		    	document.getElementById("password_error").style.display = "block";
+		    	return false;
+		    }
     	}
 	</h:outputScript>
     <title>Sign Up</title>
@@ -59,13 +65,13 @@
                                 <h3>Username:</h3>
                             </div>
                             <div class="col-xs-12 col-md-9">
-                                <h:inputText value="#{member.username}" 
+                                <h:inputText value="#{customer.username}" 
                                 	id="username"
 									required="true" 
 									a:placeholder="Username"
                                 	requiredMessage="Username is mandatory." 
                                 	validator="#{validation.validateUsername}" />
-                                <h:message for="username" styleClass="error" />
+                                <h:message for="username" styleClass="error"/>
                             </div>
                         </div>
 						<div class="col-xs-12">
@@ -73,12 +79,13 @@
                                 <h3>Password:</h3>
                             </div>
                             <div class="col-xs-12 col-md-9">
-                                <h:inputSecret  value="#{member.password}" 
+                                <h:inputSecret  value="#{customer.password}" 
                                 	id="password"
 									required="true" 
 									a:placeholder="Password"
                                 	requiredMessage="Password is mandatory."/>
-                                <h:message for="password" styleClass="error" />
+                                <h:message for="password" styleClass="error"/>
+                                <p class="error" style="display:none" id="password_error">Password length should be between 8 to 15, and should only contains alphabets and numbers.</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -154,7 +161,7 @@
                             </div>
                         </div>
                          <div style="text-align:center;">
-                        	<h:commandButton value="Sign Up" id="commandButton" styleClass="btn btn-default call-btn-1" />
+                        	<h:commandButton value="Sign Up" id="commandButton" styleClass="btn btn-default call-btn-1" action="#{member.add(customer)}"/>
                         </div>
 					</div>
 		        </h:form>

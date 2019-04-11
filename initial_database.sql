@@ -55,12 +55,13 @@ DROP TABLE IF EXISTS `customer`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `customer` (
   `CID` int(11) NOT NULL,
-  `BookingName` varchar(45) DEFAULT NULL,
   `FirstName` varchar(45) DEFAULT NULL,
   `LastName` varchar(45) DEFAULT NULL,
   `Address` varchar(45) DEFAULT NULL,
   `PhoneNum` varchar(10) DEFAULT NULL,
   `Email` varchar(45) DEFAULT NULL,
+  `username` varchar(20) DEFAULT NULL,
+  `password` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`CID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -71,7 +72,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'Jeffrey','Carol','Chang','5700 Centre Ave.','4121234567','oim@gmail.com'),(2,'Paul','David','Lin','498 Penn Ave','1349380788','dvl@yahoo.com.tw'),(3,'Beth','Kimberly','Wang','87 Liberty Ave','7886273566','kww87@gmail.com'),(4,'Ashley','Ashley','Chao','186 Webster Ave','2918883076','ashley@gmail.com'),(5,'Ben','Ben','Affleck','76 Wylie Ave','2866668779','08batman@hotmail.com'),(6,'Isaiah Hall','Isaiah','Hall','381 Bryant St.','4871036830','hall87@hotmail.com'),(7,'Kathy Burton','Kevin','Burton','72 Hampton St.','9173336940','nottim@yahoo.com');
+INSERT INTO `customer`(`CID`,`FirstName`,`LastName`,`Address`,`PhoneNum`,`Email`) VALUES (1,'Carol','Chang','5700 Centre Ave.','4121234567','oim@gmail.com'),(2,'David','Lin','498 Penn Ave','1349380788','dvl@yahoo.com.tw'),(3,'Kimberly','Wang','87 Liberty Ave','7886273566','kww87@gmail.com'),(4,'Ashley','Chao','186 Webster Ave','2918883076','ashley@gmail.com'),(5,'Ben','Affleck','76 Wylie Ave','2866668779','08batman@hotmail.com'),(6,'Isaiah','Hall','381 Bryant St.','4871036830','hall87@hotmail.com'),(7,'Kevin','Burton','72 Hampton St.','9173336940','nottim@yahoo.com');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
