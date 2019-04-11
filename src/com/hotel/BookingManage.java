@@ -1,9 +1,11 @@
 package com.hotel;
 
-import javax.faces.bean.ManagedBean;
+import javax.faces.bean.*;
+
 import java.sql.*;
 
 @ManagedBean(name="bookingManage")
+@ApplicationScoped
 public class BookingManage {
 	
 	private int rid;

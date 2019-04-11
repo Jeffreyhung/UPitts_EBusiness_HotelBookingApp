@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:f="http://java.sun.com/jsf/core" 
+		xmlns:h="http://java.sun.com/jsf/html" 
+		xmlns:p="http://primefaces.org/ui" 
+		xmlns:a="http://xmlns.jcp.org/jsf/passthrough" 
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="shortcut icon" type="image/x-icon" href="#{resource['image/icon.png']}"/>
     <h:outputStylesheet library="css" name="bootstrap.min.css" />
     <h:outputStylesheet library="css" name="style.css" />
+    <h:outputScript library="js" name="jquery.min.js" />
     <h:outputScript library="js" name="bootstrap.min.js" />
     <h:outputScript library="js" name="script.js" />
     <title>Order Detail</title>
@@ -135,8 +141,13 @@
                                 <h:message for="address" styleClass="error" />
                             </div>
                         </div>
-                        <div style="text-align:center;">
-                        	<h:commandButton value="Submit" styleClass="btn btn-default call-btn-1" action="#{bookingManage.addBooking(customer)}"/>
+
+                        <div style="text-align:center">
+                        	<h:commandButton value="Submit" styleClass="btn btn-default call-btn-1" action="#{bookingManage.addBooking(customer)}">
+								<f:param name="rid" value="#{param.rid}" />
+                                <f:param name="startDate" value="#{param.startDate}" />
+                                <f:param name="endDate" value="#{param.endDate}" />
+                            </h:commandButton>
                         </div>
                     </div>
                 </h:form>
