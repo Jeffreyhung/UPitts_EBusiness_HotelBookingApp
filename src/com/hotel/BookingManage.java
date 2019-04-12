@@ -1,7 +1,7 @@
 package com.hotel;
 
 import javax.faces.bean.*;
-
+import com.hotel.DBConnection;
 import java.sql.*;
 
 @ManagedBean(name="bookingManage")
@@ -64,7 +64,7 @@ public class BookingManage {
 	}
 	
 	public void onload()  throws ClassNotFoundException, SQLException {
-		Connection connect = connectDB();
+		Connection connect = DBConnection.connectDB();
 	// Get Room info
 		PreparedStatement pstmt = connect.prepareStatement("SELECT * FROM room WHERE RID = ?");
 		pstmt.setInt(1, getRid());
@@ -87,7 +87,7 @@ public class BookingManage {
 		setCustomer(cust);
 		int customerID = 0;
 		int bookingID = 0;
-		Connection connect = connectDB();
+		Connection connect = DBConnection.connectDB();
 		
 	// Get customer ID
 		PreparedStatement pstmt = connect.prepareStatement("SELECT MAX(cid) FROM customer");
@@ -130,21 +130,6 @@ public class BookingManage {
 		onload();
 	//redirect to confirmation page
 		return "confirmation";
-	}
-	
-	private Connection connectDB()  throws ClassNotFoundException{
-		Connection connect = null;
-		String url = "jdbc:mysql://localhost:3306/hotel";
-		String username = "root";
-		String password = "root";
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			connect = DriverManager.getConnection(url, username, password);
-		} catch (SQLException ex) {
-			System.out.println("in exec");
-			System.out.println(ex.getMessage());
-		}
-		return connect;
 	}
 	
 }

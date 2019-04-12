@@ -36,11 +36,12 @@
                     <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right">
                         <div id="mySidenav" class="sidenav text-center">
                             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br />
-                            <h:link value="Home" outcome="index" />
-                            <hr />
-                            <h:link value="Sign In" outcome="signIn" />
-                            <hr />
-                            <h:link value="Sign Up" outcome="signUp" />
+	                        <h:form>
+	                            <h:link value="Home" outcome="index" />
+	                            <h:link value="Sign In" outcome="signIn" rendered="#{!sessionUtils.status}"/>
+	                            <h:link value="Sign Up" outcome="signUp" rendered="#{!sessionUtils.status}"/>
+								<h:commandLink action="#{member.logout}" value="Logout" rendered="#{sessionUtils.status}"></h:commandLink>
+							</h:form>
                         </div>
                         <div class="main" id="main">
                             <a href="#" onclick="openNav()">MENU &#9776;</a>

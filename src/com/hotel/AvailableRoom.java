@@ -1,11 +1,8 @@
 package com.hotel;
 
-import javax.faces.application.FacesMessage;
+import com.hotel.DBConnection;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -66,20 +63,8 @@ public class AvailableRoom {
     }
 	
 	public List<Room> getRooms() throws ClassNotFoundException, SQLException {
-		Connection connect = null;
-	
-		String url = "jdbc:mysql://localhost:3306/hotel";
-		
-		String username = "root";
-		String password = "root";
-		
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			connect = DriverManager.getConnection(url, username, password);
-		} catch (SQLException ex) {
-			System.out.println("in exec");
-			System.out.println(ex.getMessage());
-		}
+		Connection connect = DBConnection.connectDB();
+
 		PreparedStatement pstmt = connect.prepareStatement("SELECT RID, Name, Capacity, NumOfBeds, Price FROM room WHERE "
 				+ "(RID NOT IN (SELECT RID FROM bookinginfo WHERE Start_Date >= ? or End_Date <= ? ))"
 				+ " AND (Capacity >= ?)");
