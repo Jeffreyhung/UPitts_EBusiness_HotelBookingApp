@@ -26,6 +26,7 @@
 	                            <h:link value="Home" outcome="index" />
 	                            <h:link value="Sign In" outcome="signIn" rendered="#{!sessionUtils.status}"/>
 	                            <h:link value="Sign Up" outcome="signUp" rendered="#{!sessionUtils.status}"/>
+	                            <h:link value="Account" outcome="account" rendered="#{sessionUtils.status}"/>
 								<h:commandLink action="#{member.logout}" value="Logout" rendered="#{sessionUtils.status}"></h:commandLink>
 							</h:form>
                         </div>
@@ -52,6 +53,7 @@
                                 		value="#{availableRoom.range}" 
                                 		readonlyInput="true" 
                                 		required="true" 
+                                		mindate="#{availableRoom.todayDate}"
                                 		requiredMessage="Please select the date" 
                                 		validator="#{validation.validateDate}" />
                             </div>

@@ -32,14 +32,13 @@ public class AuthorizationFilter implements Filter {
 					reqURI.indexOf("/signUp.xhtml") >= 0) &&
 					(ses != null && ses.getAttribute("username") != null)) {
 				resp.sendRedirect(reqt.getContextPath() + "/faces/index.xhtml");
-			} else if (reqURI.indexOf("/signIn.xhtml") >= 0 ||
-					reqURI.indexOf("/signUp.xhtml") >= 0 ||
-					(ses != null && ses.getAttribute("username") != null) ||
+			} else if (	(ses != null && ses.getAttribute("username") != null) ||
 					reqURI.contains("javax.faces.resource")) {
 				chain.doFilter(request, response);
-			}else if(reqURI.indexOf("/member.xhtml") >= 0 ||
-					ses == null || 
-					ses.getAttribute("username") == null) {
+			}else if((reqURI.indexOf("/member.xhtml") >= 0 ||
+					reqURI.indexOf("/logout.xhtml") >= 0) &&
+					(ses == null || 
+					ses.getAttribute("username") == null)) {
 				resp.sendRedirect(reqt.getContextPath() + "/faces/signIn.xhtml");
 			}else {
 				chain.doFilter(request, response);

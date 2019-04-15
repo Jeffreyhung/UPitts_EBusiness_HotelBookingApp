@@ -18,6 +18,11 @@ public class AvailableRoom {
 	private int numOfPeople;
 	private int selectedRid;
 	private List<Date> range;
+	private Date todayDate = new Date();
+	
+	public Date getTodayDate() {
+	    return todayDate;
+	}
 	
 	public String getStartDate() {
 		return startDate;

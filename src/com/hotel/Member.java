@@ -5,18 +5,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.hotel.DBConnection;
+import com.hotel.SessionUtils;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-import com.hotel.SessionUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @ManagedBean(name="member")
 @SessionScoped
 public class Member {
+	private int cid;
 	private Customer customer;
 	private String username;
 	private String password;
+	private String newPassword;
 	
 	public Member() {}
 	
@@ -48,6 +53,14 @@ public class Member {
 		return password;
 	}
 	
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+	
+	public String getNewPassword() {
+		return newPassword;
+	}
+	
 	public String login() throws ClassNotFoundException, SQLException {
 		boolean valid = loginValidation();
 		if (valid) {
@@ -70,6 +83,7 @@ public class Member {
 	        return false;
 	    }else {
 	    	String correctPW = rs.getString("password");
+	    	this.cid = rs.getInt("CID");
 	    	if (password.equals(correctPW)) {
 	    		return true;
 	    	}
@@ -129,5 +143,83 @@ public class Member {
 		HttpSession session = SessionUtils.getSession();
 		session.invalidate();
 		return "index";
+	}
+
+	public void retrieve() throws ClassNotFoundException, SQLException {
+		this.username = SessionUtils.getUserId();
+		Connection connect = DBConnection.connectDB();
+		PreparedStatement pstmt = connect.prepareStatement("SELECT * FROM customer where username = ?");
+		pstmt.setString(1, username);
+		ResultSet rs = pstmt.executeQuery();
+		Customer tem = new Customer();
+		if (rs.next() != false) {
+			tem.setCid(rs.getInt("CID"));
+			tem.setFirstName(rs.getString("FirstName"));
+			tem.setLastName(rs.getString("LastName"));
+			tem.setAddress(rs.getString("Address"));
+			tem.setPhone(rs.getString("PhoneNum"));
+			tem.setEmail(rs.getString("Email"));;
+	    }
+		this.customer = tem;
+	}
+
+	public String edit() throws ClassNotFoundException, SQLException {
+		Connection connect = DBConnection.connectDB();
+		boolean changePW = (newPassword != null);
+		if(changePW) {
+			PreparedStatement pstmt3 = connect.prepareStatement(
+					"UPDATE customer SET FirstName = ?, LastName = ?, Address = ?, PhoneNum = ?, Email = ?, password = ?"
+					+ "WHERE username = ?");
+			pstmt3.setString(1, customer.getFirstName());
+			pstmt3.setString(2, customer.getLastName());
+			pstmt3.setString(3, customer.getAddress());
+			pstmt3.setString(4, customer.getPhone());
+			pstmt3.setString(5, customer.getEmail());
+			pstmt3.setString(6, newPassword);
+			pstmt3.setString(7, username);
+			pstmt3.executeUpdate();
+			pstmt3.close();
+		}else {
+			PreparedStatement pstmt3 = connect.prepareStatement(
+					"UPDATE customer SET FirstName = ?, LastName = ?, Address = ?, PhoneNum = ?, Email = ?"
+					+ "WHERE username = ?");
+			pstmt3.setString(1, customer.getFirstName());
+			pstmt3.setString(2, customer.getLastName());
+			pstmt3.setString(3, customer.getAddress());
+			pstmt3.setString(4, customer.getPhone());
+			pstmt3.setString(5, customer.getEmail());
+			pstmt3.setString(6, username);
+			pstmt3.executeUpdate();
+			pstmt3.close();
+		}
+		connect.close();
+		return "memberInfo";
+	}
+
+	public List<BookingInfo> getBookingList() throws SQLException, ClassNotFoundException{
+		Connection connect = DBConnection.connectDB();
+		PreparedStatement pstmt = connect.prepareStatement("SELECT * FROM bookinginfo WHERE CID = ?");
+		pstmt.setInt(1, cid);
+		ResultSet rs = pstmt.executeQuery();
+
+		List<BookingInfo> BIs = new ArrayList<BookingInfo>();
+		while (rs.next()) {
+			BookingInfo temp = new BookingInfo();
+			temp.setBid(rs.getInt("BID"));
+			temp.setRid(rs.getInt("RID"));
+			temp.setStartDate(rs.getString("Start_Date"));
+			temp.setEndDate(rs.getString("End_Date"));
+			BIs.add(temp);
+		}
+		rs.close();
+		pstmt.close();
+		connect.close();
+		return BIs;
+	}
+
+	public String cancel(int bid) throws ClassNotFoundException, SQLException{
+		
+		
+		return "cancel";
 	}
 }

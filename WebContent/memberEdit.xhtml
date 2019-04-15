@@ -4,7 +4,7 @@
 <h:head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" type="image/x-icon" href="#{resource['image/icon.png']}"/>
+    <link rel="shortcut icon" type="image/x-icon" href="#{resource['image/icon.png']}" />
     <h:outputStylesheet library="css" name="bootstrap.min.css" />
     <h:outputStylesheet library="css" name="style.css" />
     <h:outputScript library="js" name="jquery.min.js" />
@@ -13,21 +13,30 @@
     <h:outputScript library="js" name="sha256.js" />
     <h:outputScript target="head">
     	function check(){
-    		var pwError = document.getElementById("password_error");
-		    var password = document.getElementById("signUp:password");
+    		var pwError = document.getElementById("new_password_error");
+    		var oldPassword = document.getElementById("memberEdit:password")
+		    var newPassword = document.getElementById("memberEdit:newPassword");
 		    var password_reg = new RegExp("^[a-zA-Z0-9]{8,15}$");
-		    var match = password_reg.test(password.value);
+		    var match = password_reg.test(newPassword.value);
 		    if(match){
-		    	var hash = CryptoJS.SHA256(password.value);
-		    	password.value = hash;
+		    	var hash = CryptoJS.SHA256(newPassword.value);
+		    	newPassword.value = hash;
+		    	var hash = CryptoJS.SHA256(oldPassword.value);
+		    	oldPassword.value = hash;
+		    	
 		    	return true;
 		    }else{
-		    	document.getElementById("password_error").style.display = "block";
+		    	document.getElementById("new_password_error").style.display = "block";
 		    	return false;
 		    }
     	}
 	</h:outputScript>
-    <title>Sign Up</title>
+    <title>Edit Member Info</title>
+    <f:view>
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{member.retrieve}" />
+        </f:metadata>
+    </f:view>
 </h:head>
 <h:body>
     <section class="element-full">
@@ -39,10 +48,14 @@
                     </div>
                     <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right">
                         <div id="mySidenav" class="sidenav text-center">
-                            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br />
-                            <h:link value="Home" outcome="index" />
-                            <hr />
-                            <h:link value="Sign In" outcome="signIn"  rendered="#{!sessionUtils.status}"/>
+                            <h:form>
+                                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br />
+                                <h:link value="Home" outcome="index" />
+                                <hr />
+                                <h:link value="Account" outcome="account" rendered="#{sessionUtils.status}" />
+                                <hr />
+                                <h:commandLink action="#{member.logout}" value="Logout" rendered="#{sessionUtils.status}"></h:commandLink>
+                            </h:form>
                         </div>
                         <div class="main" id="main">
                             <a href="#" onclick="openNav()">MENU &#9776;</a>
@@ -54,36 +67,36 @@
         </section>
         <section class="element-page">
             <div class="container">
-                <h2 class="text-center">Sign Up</h2>
-                <hr class="hr-mid" />
-                <h:form id="signUp" onsubmit="return check()">
+                <h1 class="text-center">Edit Member Information</h1>
+                <hr class="hr-mid" /><br />
+                <h:form id="memberEdit" onsubmit="return check()">
 		             <div class="row">
-                        <div class="col-xs-12">
+                            <div class="col-xs-12 text-center">
+                                <h3>Username: #{member.username}</h3>
+                            </div>
+						<div class="col-xs-12">
                             <div class="col-xs-12 col-md-3 text-center">
-                                <h3>Username:</h3>
+                                <h3>Old Password:</h3>
                             </div>
                             <div class="col-xs-12 col-md-9">
-                                <h:inputText value="#{customer.username}" 
-                                	id="username"
+                                <h:inputSecret  value="#{member.password}" 
+                                	id="password"
 									required="true" 
-									a:placeholder="Username"
-                                	requiredMessage="Username is mandatory." 
-                                	validator="#{validation.validateUsername}" />
-                                <h:message for="username" styleClass="error"/>
+									a:placeholder="Old Password is required for making changes"
+                                	requiredMessage="Please enter your password to make changes"/>   
+                                <h:message for="password" styleClass="error"/>                             
                             </div>
                         </div>
 						<div class="col-xs-12">
                             <div class="col-xs-12 col-md-3 text-center">
-                                <h3>Password:</h3>
+                                <h3>New Password:</h3>
                             </div>
                             <div class="col-xs-12 col-md-9">
-                                <h:inputSecret  value="#{customer.password}" 
-                                	id="password"
-									required="true" 
-									a:placeholder="Password"
-                                	requiredMessage="Password is mandatory."/>
-                                <h:message for="password" styleClass="error"/>
-                                <p class="error" style="display:none" id="password_error">Password length should be between 8 to 15, and should only contains alphabets and numbers.</p>
+                                <h:inputSecret  value="#{member.newPassword}" 
+                                	id="newPassword"
+									a:placeholder="Please enter New Password here if you want to change your Password"/>
+                                <h:message for="newPassword" styleClass="error"/>
+                                <p class="error" style="display:none" id="new_password_error">Password length should be between 8 to 15, and should only contains alphabets and numbers.</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -91,7 +104,7 @@
                                 <h3>First Name:</h3>
                             </div>
                             <div class="col-xs-12 col-md-7">
-                                <h:inputText value="#{customer.firstName}" 
+                                <h:inputText value="#{member.customer.firstName}" 
                                 	id="firstName"
 									required="true" 
                                 	requiredMessage="First Name is mandatory." 
@@ -105,7 +118,7 @@
                                 <h3>Last Name:</h3>
                             </div>
                             <div class="col-xs-12 col-md-7">
-                                <h:inputText value="#{customer.lastName}" 
+                                <h:inputText value="#{member.customer.lastName}" 
                                 	id="lastName"
 									required="true" 
                                 	requiredMessage="Last Name is mandatory." 
@@ -119,7 +132,7 @@
                                 <h3>Email:</h3>
                             </div>
                             <div class="col-xs-12 col-md-7">
-                                <h:inputText value="#{customer.email}" 
+                                <h:inputText value="#{member.customer.email}" 
                                 	id="email" 
                                 	required="true" 
                                 	requiredMessage="Your email is mandatory." 
@@ -133,7 +146,7 @@
                                 <h3>Phone:</h3>
                             </div>
                             <div class="col-xs-12 col-md-7">
-                                <h:inputText value="#{customer.phone}" 
+                                <h:inputText value="#{member.customer.phone}" 
                                 	id="phoneNum"
 									required="true" 
                                 	requiredMessage="Your phone is mandatory." 
@@ -149,7 +162,7 @@
                                 <h3>Address:</h3>
                             </div>
                             <div class="col-xs-12 col-md-9">
-                                <h:inputText value="#{customer.address}" 
+                                <h:inputText value="#{member.customer.address}" 
                                 	id="address" 
                                 	required="true" 
                                 	requiredMessage="Your address is mandatory."
@@ -159,18 +172,16 @@
                             </div>
                         </div>
                          <div style="text-align:center;">
-                        	<h:commandButton value="Sign Up" id="commandButton" styleClass="btn btn-default call-btn-1" action="#{member.signUp(customer)}"/>
+                         	<div class="col-xs-6">
+                         		<h:button  value="Back"  outcome="memberInfo" styleClass="btn btn-default call-btn-1"/>
+                         	</div>
+                         	<div class="col-xs-6">
+                         		<h:commandButton value="Save" id="commandButton" styleClass="btn btn-default call-btn-1" action="#{member.edit()}"/>
+                         	</div>
                         </div>
-                        <br/><hr class="hr-mid" /><br/>
-                        <div style="text-align:center;">
-				        	<p>
-				        		Already have an account? <h:link value="Sign In" outcome="signIn" />
-				        	</p>
-				        </div>
 					</div>
 		        </h:form>
             </div>
-            
         </section>
         <section class="footer">
             <div class="container">

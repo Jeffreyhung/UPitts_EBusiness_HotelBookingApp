@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" type="image/x-icon" href="#{resource['image/icon.png']}"/>
+    <link rel="shortcut icon" type="image/x-icon" href="#{resource['image/icon.png']}" />
     <h:outputStylesheet library="css" name="bootstrap.min.css" />
     <h:outputStylesheet library="css" name="style.css" />
+    <h:outputScript library="js" name="jquery.min.js" />
     <h:outputScript library="js" name="bootstrap.min.js" />
     <h:outputScript library="js" name="script.js" />
-    <title>Confirmation</title>
+    <h:outputScript library="js" name="sha256.js" />
+    <title>Account</title>
 </h:head>
 <h:body>
     <section class="element-full">
@@ -21,14 +23,12 @@
                     </div>
                     <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right">
                         <div id="mySidenav" class="sidenav text-center">
-                            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br />
-	                        <h:form>
-	                            <h:link value="Home" outcome="index" />
-	                            <h:link value="Sign In" outcome="signIn" rendered="#{!sessionUtils.status}"/>
-	                            <h:link value="Sign Up" outcome="signUp" rendered="#{!sessionUtils.status}"/>
-	                            <h:link value="Account" outcome="account" rendered="#{sessionUtils.status}"/>
-								<h:commandLink action="#{member.logout}" value="Logout" rendered="#{sessionUtils.status}"></h:commandLink>
-							</h:form>
+                            <h:form>
+                                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br />
+                                <h:link value="Home" outcome="index" />
+                                <hr />
+                                <h:commandLink action="#{member.logout}" value="Logout" rendered="#{sessionUtils.status}"></h:commandLink>
+                            </h:form>
                         </div>
                         <div class="main" id="main">
                             <a href="#" onclick="openNav()">MENU &#9776;</a>
@@ -40,17 +40,26 @@
         </section>
         <section class="element-page">
             <div class="container">
-                <h2 class="text-center">Thank you for your Order</h2>
-                <hr class="hr-mid" />
-                <h3 class="text-center">
-                    #{bookingManage.startDate} to #{bookingManage.endDate}<br /><br />
-                    #{bookingManage.room.rname} ● $#{bookingManage.room.rprice} / Night<br /><br />
-                    <hr class="hr-mid" />
-                    #{bookingManage.customer.firstName}  #{bookingManage.customer.lastName}<br /><br />
-                    Phone: #{bookingManage.customer.phone}<br /><br />
-                    Email: #{bookingManage.customer.email}<br /><br />
-                    Address: #{bookingManage.customer.address}<br /><br />
-                </h3>
+                <h1 class="text-center">Account Dashboard</h1>
+                <hr class="hr-mid" /><br/>
+                <h:form id="signIn" onsubmit="return hash()">
+                    <div class="row" style="height:250px">
+                        <div class="col-xs-12 col-md-6 text-center">
+                        	<h:link outcome="memberInfo" >
+                            <h:graphicImage library="image" name="member.svg" styleClass="img-responsive" style="height:200px; margin:auto;"/>
+                            <br/>
+                            <h2 style="color:black;"> Member Info</h2>
+                            </h:link>
+                        </div>
+                        <div class="col-xs-12 col-md-6 text-center">
+                        <h:link outcome="bookingHistory">
+                            <h:graphicImage library="image" name="booking.svg" styleClass="img-responsive" style="height:200px; margin:auto;"/>
+                            <br/>
+                            <h2> Booking Info</h2>
+                            </h:link>
+                        </div>
+                    </div>
+                </h:form>
             </div>
         </section>
         <section class="footer">

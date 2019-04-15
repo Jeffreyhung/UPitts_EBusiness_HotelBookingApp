@@ -43,11 +43,29 @@ body{
 .sidenav a {
     padding: 5%;
     text-decoration: none;
-    color: #818181;
+    color: black;
     display: block;
     transition: 0.3s;
     font-size: 16px;
     letter-spacing: 2px;
+}
+.element-page a{
+    padding: 5%;
+    text-decoration: none;
+    color: black;
+    display: block;
+    transition: 0.3s;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+.link a{
+	color: #337ab7;
+    font-size: 16px;
+    cursor:pointer;
+    font-weight: 600;
+    vertical-align: middle;
+    font-style: italic;
+    text-decoration:underline;
 }
 .sidenav hr{
     margin-bottom: 5px;
@@ -227,12 +245,11 @@ h6{
     margin-left: auto;
 }
 
-i{
-        display: table-cell; 
-        vertical-align: middle;
-        position: relative;
-        top: 50%;
-        transform: translateY(50%);
+i{ 
+    vertical-align: middle;
+    position: relative;
+    top: 50%;
+    transform: translateY(50%);
         
 }
 .font-2{
@@ -328,6 +345,7 @@ i.fa-heart{
 }
 .element-page{
     padding-top: 25px;
+    margin-bottom: 50px 
 }
 .Element-heading{
     padding-top: 15px;
