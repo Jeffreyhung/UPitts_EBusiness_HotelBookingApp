@@ -35,8 +35,10 @@ public class AuthorizationFilter implements Filter {
 			} else if (	(ses != null && ses.getAttribute("username") != null) ||
 					reqURI.contains("javax.faces.resource")) {
 				chain.doFilter(request, response);
-			}else if((reqURI.indexOf("/member.xhtml") >= 0 ||
-					reqURI.indexOf("/logout.xhtml") >= 0) &&
+			}else if((reqURI.indexOf("/memberEdit.xhtml") >= 0 ||
+					reqURI.indexOf("/logout.xhtml") >= 0 ||
+					reqURI.indexOf("/bookingHistory.xhtml") >= 0 ||
+					reqURI.indexOf("/memberInfo.xhtml") >= 0) &&
 					(ses == null || 
 					ses.getAttribute("username") == null)) {
 				resp.sendRedirect(reqt.getContextPath() + "/faces/signIn.xhtml");
