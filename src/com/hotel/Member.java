@@ -1,5 +1,6 @@
 package com.hotel;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +9,9 @@ import com.hotel.DBConnection;
 import com.hotel.SessionUtils;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.*;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
@@ -216,10 +219,19 @@ public class Member {
 		connect.close();
 		return BIs;
 	}
-
-	public String cancel(int bid) throws ClassNotFoundException, SQLException{
-		
-		
-		return "cancel";
+	
+	public void cancel(int bid) throws IOException, ClassNotFoundException, SQLException {
+		Connection connect = DBConnection.connectDB();
+		PreparedStatement pstmt = connect.prepareStatement("DELETE FROM bookinginfo WHERE BID = ?");
+		pstmt.setInt(1, bid);
+		pstmt.executeUpdate();
+		pstmt.close();
+		connect.close();
+		reload();
+	}
+	
+	public void reload() throws IOException {
+	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+	    ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
 	}
 }

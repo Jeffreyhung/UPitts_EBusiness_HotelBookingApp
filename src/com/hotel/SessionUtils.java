@@ -35,8 +35,10 @@ public class SessionUtils {
 	
 	public boolean getStatus() {
 		if (getUserId() != null) {
+			this.status = true;
 			return true;
 		}else {
+			this.status = false;
 			return false;
 		}
 	}

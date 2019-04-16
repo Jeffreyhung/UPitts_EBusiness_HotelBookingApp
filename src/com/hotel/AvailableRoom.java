@@ -3,6 +3,8 @@ package com.hotel;
 import com.hotel.DBConnection;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.List;
 import java.util.Date;
 
 @ManagedBean(name="availableRoom")
-@ApplicationScoped
+@SessionScoped
 public class AvailableRoom {
 	
 	private String startDate;

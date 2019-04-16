@@ -9,8 +9,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name="bookingInfo")
+@SessionScoped
 public class BookingInfo {
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	private int bid;

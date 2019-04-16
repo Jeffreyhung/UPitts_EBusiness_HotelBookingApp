@@ -2,13 +2,12 @@ package com.hotel;
 
 import javax.faces.bean.*;
 import com.hotel.DBConnection;
+import com.hotel.SessionUtils;
+
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @ManagedBean(name="bookingManage")
-@ApplicationScoped
+@SessionScoped
 public class BookingManage {
 	private int rid;
 	private String startDate;
@@ -67,6 +66,24 @@ public class BookingManage {
 	
 	public void onload()  throws ClassNotFoundException, SQLException {
 		Connection connect = DBConnection.connectDB();
+		if (SessionUtils.getUserId()!=null) {
+			PreparedStatement pstmt0 = connect.prepareStatement("SELECT * FROM customer WHERE username = ?");
+			pstmt0.setString(1, SessionUtils.getUserId());
+			ResultSet rs0 = pstmt0.executeQuery();
+			if(rs0.next()) {
+				Customer tem = new Customer();
+				tem.setCid(rs0.getInt("CID"));
+				tem.setFirstName(rs0.getString("FirstName"));
+				tem.setLastName(rs0.getString("LastName"));
+				tem.setPhone(rs0.getString("PhoneNum"));
+				tem.setAddress(rs0.getString("Address"));
+				tem.setEmail(rs0.getString("Email"));
+				this.customer = tem;
+			}
+			rs0.close();
+			pstmt0.close();
+		}
+		
 	// Get Room info
 		PreparedStatement pstmt = connect.prepareStatement("SELECT * FROM room WHERE RID = ?");
 		pstmt.setInt(1, getRid());
@@ -92,24 +109,28 @@ public class BookingManage {
 		Connection connect = DBConnection.connectDB();
 		
 	// Get customer ID
-		PreparedStatement pstmt = connect.prepareStatement("SELECT MAX(cid) FROM customer");
-		ResultSet rs = pstmt.executeQuery();
-		while (rs.next()) {
-			customerID = rs.getInt("MAX(cid)")+1;
+		if (SessionUtils.getUserId() ==null) {
+			PreparedStatement pstmt = connect.prepareStatement("SELECT MAX(cid) FROM customer");
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				customerID = rs.getInt("MAX(cid)")+1;
+			}
+			rs.close();
+			pstmt.close();
+			customer.setCid(customerID);
+			
+			// Add value to customer table
+			PreparedStatement pstmt2 = connect.prepareStatement("INSERT INTO customer (CID, FirstName, LastName, Address, PhoneNum, Email)VALUES (?, ?, ?, ?, ?, ?) ");
+			pstmt2.setInt(1, customer.getCid());
+			pstmt2.setString(2, customer.getFirstName());
+			pstmt2.setString(3, customer.getLastName());
+			pstmt2.setString(4, customer.getAddress());
+			pstmt2.setString(5, customer.getPhone());
+			pstmt2.setString(6, customer.getEmail());
+			pstmt2.executeUpdate();
+			pstmt2.close();
 		}
-		rs.close();
-		pstmt.close();
-		customer.setCid(customerID);
-	// Add value to customer table
-		PreparedStatement pstmt2 = connect.prepareStatement("INSERT INTO customer (CID, FirstName, LastName, Address, PhoneNum, Email)VALUES (?, ?, ?, ?, ?, ?) ");
-		pstmt2.setInt(1, customer.getCid());
-		pstmt2.setString(2, customer.getFirstName());
-		pstmt2.setString(3, customer.getLastName());
-		pstmt2.setString(4, customer.getAddress());
-		pstmt2.setString(5, customer.getPhone());
-		pstmt2.setString(6, customer.getEmail());
-		pstmt2.executeUpdate();
-		pstmt2.close();
+		
 	// Get booking ID
 		PreparedStatement pstmt3 = connect.prepareStatement("SELECT MAX(bid) FROM bookinginfo");
 		ResultSet rs2 = pstmt3.executeQuery();

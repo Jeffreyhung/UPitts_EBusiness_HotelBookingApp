@@ -7,7 +7,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="#{resource['image/icon.png']}" />
     <h:outputStylesheet library="css" name="bootstrap.min.css" />
     <h:outputStylesheet library="css" name="style.css" />
-    <h:outputScript library="js" name="jquery.min.js" />
     <h:outputScript library="js" name="bootstrap.min.js" />
     <h:outputScript library="js" name="script.js" />
     <h:outputScript library="js" name="sha256.js" />
@@ -51,6 +50,7 @@
                 <hr class="hr-mid" /><br />
                 <h:form style="width:80%; margin:auto">
                     <p:dataTable value="#{member.bookingList}" var="booking" border="2" styleclass="table text-center" style="width:100%; text-align: center" tableStyle="width:100%;table-layout:auto" emptyMessage="No booking History found">
+                        <p:growl id="message" showDetail="true" />	
                         <p:column rendered="false">
                             <f:facet name="header">Booking ID</f:facet> #{booking.bid}
                         </p:column>
@@ -70,18 +70,19 @@
                             <f:facet name="header">Dates</f:facet> #{booking.startDate} #{booking.endDate}
                         </p:column>
                         <p:column style="text-align: center">
-                            <p:commandButton action="#{member.cancel(bid)}" styleClass="btn btn-default call-btn-3" value="Cancel" disabled="#{booking.past}">
-                            </p:commandButton>
+                  			<p:commandButton disabled="#{booking.past}" styleClass="btn btn-default call-btn-3" 
+						     	value="Cancel" action="#{member.cancel(booking.bid)}" update="message">
+						        <p:confirm header="Confirmation" message="Are you sure you want to cancel this booking?"/>
+						    </p:commandButton>
                         </p:column>
                     </p:dataTable>
+				    <p:confirmDialog global="true" style="text-align: center">
+				        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes"  />
+				        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"/>
+				    </p:confirmDialog> 
                 </h:form>
             </div>
-            <p:dialog>
-                <h:form>
-                    <p:commandButton action="#{myBean.setSelected}" oncomplete="if(#{myBean.errorText == 'SUCCESS'}){ selectProductDlg.hide();}" value="Sec">
-                    </p:commandButton>
-                </h:form>
-            </p:dialog>
+            
             <div class="wow-btn text-center" style="width:300px; margin: auto;">
                 <h:button value="Back" outcome="account" styleClass="btn btn-default call-btn-2 wow-button" />
             </div>

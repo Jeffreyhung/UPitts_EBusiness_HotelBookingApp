@@ -71,7 +71,7 @@
                                 <h3>First Name:</h3>
                             </div>
                             <div class="col-xs-12 col-md-7">
-                                <h:inputText value="#{customer.firstName}" id="firstName" required="true" requiredMessage="First Name is mandatory." a:placeholder="First Name" validator="#{validation.validateName}" />
+                                <h:inputText value="#{bookingManage.customer.firstName}" id="firstName" required="true" requiredMessage="First Name is mandatory." a:placeholder="First Name" validator="#{validation.validateName}" />
                                 <h:message for="firstName" styleClass="error" />
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                                 <h3>Last Name:</h3>
                             </div>
                             <div class="col-xs-12 col-md-7">
-                                <h:inputText value="#{customer.lastName}" id="lastName" required="true" requiredMessage="Last Name is mandatory." a:placeholder="Last Name" validator="#{validation.validateName}" />
+                                <h:inputText value="#{bookingManage.customer.lastName}" id="lastName" required="true" requiredMessage="Last Name is mandatory." a:placeholder="Last Name" validator="#{validation.validateName}" />
                                 <h:message for="lastName" styleClass="error" />
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                                 <h3>Email:</h3>
                             </div>
                             <div class="col-xs-12 col-md-7">
-                                <h:inputText value="#{customer.email}" id="email" required="true" requiredMessage="Your email is mandatory." a:placeholder="Your Email Address" validator="#{validation.validateEmail}" />
+                                <h:inputText value="#{bookingManage.customer.email}" id="email" required="true" requiredMessage="Your email is mandatory." a:placeholder="Your Email Address" validator="#{validation.validateEmail}" />
                                 <h:message for="email" styleClass="error" />
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                                 <h3>Phone:</h3>
                             </div>
                             <div class="col-xs-12 col-md-7">
-                                <h:inputText value="#{customer.phone}" id="phoneNum" required="true" requiredMessage="Your phone is mandatory." a:placeholder="Your phone number" validatorMessage="Phone number must follow xxx-xxx-xxxx">
+                                <h:inputText value="#{bookingManage.customer.phone}" id="phoneNum" required="true" requiredMessage="Your phone is mandatory." a:placeholder="Your phone number" validatorMessage="Phone number must follow xxx-xxx-xxxx">
                                     <f:validateRegex pattern="\d{3}-\d{3}-\d{4}" />
                                 </h:inputText>
                                 <h:message for="phoneNum" styleClass="error" />
@@ -109,12 +109,12 @@
                                 <h3>Address:</h3>
                             </div>
                             <div class="col-xs-12 col-md-9">
-                                <h:inputText value="#{customer.address}" id="address" required="true" requiredMessage="Your address is mandatory." a:placeholder="Your address" validator="#{validation.validateAddress}" />
+                                <h:inputText value="#{bookingManage.customer.address}" id="address" required="true" requiredMessage="Your address is mandatory." a:placeholder="Your address" validator="#{validation.validateAddress}" />
                                 <h:message for="address" styleClass="error" />
                             </div>
                         </div>
                         <div class="wow-btn text-center" style="width:300px; margin: auto;">
-                            <h:commandButton value="Submit" styleClass="btn btn-default call-btn-2 wow-button" action="#{bookingManage.addBooking(customer)}">
+                            <h:commandButton value="Submit" styleClass="btn btn-default call-btn-2 wow-button" action="#{bookingManage.addBooking(bookingManage.customer)}">
                                 <f:param name="rid" value="#{param.rid}" />
                                 <f:param name="startDate" value="#{param.startDate}" />
                                 <f:param name="endDate" value="#{param.endDate}" />
