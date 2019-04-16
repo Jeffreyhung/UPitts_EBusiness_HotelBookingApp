@@ -3,11 +3,13 @@ package com.hotel;
 import javax.faces.bean.*;
 import com.hotel.DBConnection;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @ManagedBean(name="bookingManage")
 @ApplicationScoped
 public class BookingManage {
-	
 	private int rid;
 	private String startDate;
 	private String endDate;

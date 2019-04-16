@@ -32,8 +32,8 @@
                                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br />
                                 <h:link value="Home" outcome="index" />
                                 <hr />
-                                <h:link value="Account" outcome="account" rendered="#{sessionUtils.status}"/>
-                                <hr/>
+                                <h:link value="Account" outcome="account" rendered="#{sessionUtils.status}" />
+                                <hr />
                                 <h:commandLink action="#{member.logout}" value="Logout" rendered="#{sessionUtils.status}"></h:commandLink>
                             </h:form>
                         </div>
@@ -48,15 +48,9 @@
         <section class="element-page">
             <div class="container">
                 <h1 class="text-center">Booking History</h1>
-                <hr class="hr-mid" /><br/>
-                <h:form style="width:80%; margin:auto" >
-                    <p:dataTable 
-                    		value="#{member.bookingList}" 
-                    		var="booking" border="2" 
-                    		styleclass="table text-center" 
-                    		style = "width:100%"
-                    		tableStyle="width:100%;table-layout:auto"
-                    		emptyMessage="">
+                <hr class="hr-mid" /><br />
+                <h:form style="width:80%; margin:auto">
+                    <p:dataTable value="#{member.bookingList}" var="booking" border="2" styleclass="table text-center" style="width:100%; text-align: center" tableStyle="width:100%;table-layout:auto" emptyMessage="No booking History found">
                         <p:column rendered="false">
                             <f:facet name="header">Booking ID</f:facet> #{booking.bid}
                         </p:column>
@@ -76,14 +70,20 @@
                             <f:facet name="header">Dates</f:facet> #{booking.startDate} #{booking.endDate}
                         </p:column>
                         <p:column style="text-align: center">
-                            <p:commandButton 
-                            		action="#{member.cancel(bid)}" 
-                            		styleClass="btn btn-default call-btn-3" 
-                            		value="Cancel">
+                            <p:commandButton action="#{member.cancel(bid)}" styleClass="btn btn-default call-btn-3" value="Cancel" disabled="#{booking.past}">
                             </p:commandButton>
                         </p:column>
                     </p:dataTable>
                 </h:form>
+            </div>
+            <p:dialog>
+                <h:form>
+                    <p:commandButton action="#{myBean.setSelected}" oncomplete="if(#{myBean.errorText == 'SUCCESS'}){ selectProductDlg.hide();}" value="Sec">
+                    </p:commandButton>
+                </h:form>
+            </p:dialog>
+            <div class="wow-btn text-center" style="width:300px; margin: auto;">
+                <h:button value="Back" outcome="account" styleClass="btn btn-default call-btn-2 wow-button" />
             </div>
         </section>
         <section class="footer">

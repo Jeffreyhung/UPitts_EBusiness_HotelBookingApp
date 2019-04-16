@@ -4,7 +4,7 @@
 <h:head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" type="image/x-icon" href="#{resource['image/icon.png']}"/>
+    <link rel="shortcut icon" type="image/x-icon" href="#{resource['image/icon.png']}" />
     <h:outputStylesheet library="css" name="bootstrap.min.css" />
     <h:outputStylesheet library="css" name="style.css" />
     <h:outputScript library="js" name="bootstrap.min.js" />
@@ -21,14 +21,14 @@
                     </div>
                     <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right">
                         <div id="mySidenav" class="sidenav text-center">
-                        	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br />
-	                        <h:form>
-	                            <h:link value="Home" outcome="index" />
-	                            <h:link value="Sign In" outcome="signIn" rendered="#{!sessionUtils.status}"/>
-	                            <h:link value="Sign Up" outcome="signUp" rendered="#{!sessionUtils.status}"/>
-	                            <h:link value="Account" outcome="account" rendered="#{sessionUtils.status}"/>
-								<h:commandLink action="#{member.logout}" value="Logout" rendered="#{sessionUtils.status}"></h:commandLink>
-							</h:form>
+                            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br />
+                            <h:form>
+                                <h:link value="Home" outcome="index" />
+                                <h:link value="Sign In" outcome="signIn" rendered="#{!sessionUtils.status}" />
+                                <h:link value="Sign Up" outcome="signUp" rendered="#{!sessionUtils.status}" />
+                                <h:link value="Account" outcome="account" rendered="#{sessionUtils.status}" />
+                                <h:commandLink action="#{member.logout}" value="Logout" rendered="#{sessionUtils.status}"></h:commandLink>
+                            </h:form>
                         </div>
                         <div class="main" id="main">
                             <a href="#" onclick="openNav()">MENU &#9776;</a>
@@ -47,28 +47,14 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-lg-6 col-md-6 col-sm-6 col-xs-6 control-label">Select Date</label>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
-                                <p:datePicker 
-                                		id="datePicker" 
-                                		selectionMode="range" 
-                                		value="#{availableRoom.range}" 
-                                		readonlyInput="true" 
-                                		required="true" 
-                                		mindate="#{availableRoom.todayDate}"
-                                		requiredMessage="Please select the date" 
-                                		validator="#{validation.validateDate}" />
+                                <p:datePicker id="datePicker" selectionMode="range" value="#{availableRoom.range}" readonlyInput="true" required="true" mindate="#{availableRoom.todayDate}" requiredMessage="Please select the date" validator="#{validation.validateDate}" />
                             </div>
                         </div>
                         <h:message for="datePicker" styleClass="error" />
                         <div class="form-group">
                             <label for="inputEmail3" class="col-lg-6 col-md-6 col-sm-6 col-xs-6 control-label">Number of People</label>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
-                                <p:selectOneMenu 
-                                		id="numOfPeople" 
-                                		value="#{availableRoom.numOfPeople}"
-                                		style="width:200px" 
-                                		required="true" 
-                                		styleClass="select" 
-                                		validator="#{validation.validateNum}">
+                                <p:selectOneMenu id="numOfPeople" value="#{availableRoom.numOfPeople}" style="width:200px" required="true" styleClass="select" validator="#{validation.validateNum}">
                                     <f:selectItem itemLabel="1" itemValue="1" styleClass="option" />
                                     <f:selectItem itemLabel="2" itemValue="2" styleClass="option" />
                                     <f:selectItem itemLabel="3" itemValue="3" styleClass="option" />
@@ -77,13 +63,9 @@
                                 <h:message for="numOfPeople" styleClass="error" />
                             </div>
                         </div>
-                        <div style="width:300px; margin: auto;">
+                        <div class="wow-btn text-center" style="width:300px; margin: auto;">
                             <h4>
-                                <h:commandButton 
-                                		value="Search" 
-                                		action="#{availableRoom.run()}" 
-                                		styleClass="btn btn-default call-btn-2" 
-                                		required="true">
+                                <h:commandButton value="Search" action="#{availableRoom.run()}" styleClass="btn btn-default call-btn-2 wow-button" required="true">
                                     <f:param name="startDate" value="#{availableRoom.startDate}" />
                                     <f:param name="endDate" value="#{availableRoom.endDate}" />
                                     <f:param name="numOfPeople" value="#{availableRoom.numOfPeople}" />
@@ -93,7 +75,7 @@
                     </h4>
                 </h:form>
             </div>
-            <br/><br/>
+            <br /><br />
             <div>
                 <section class="row" style="margin-right: 20px; margin-left: 20px; margin-bottom: 50px ">
                     <div class="col-lg-4 col-xs-12 col-sm-12 col-md-4">

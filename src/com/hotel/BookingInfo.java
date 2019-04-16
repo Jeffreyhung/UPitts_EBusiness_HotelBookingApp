@@ -4,17 +4,22 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean(name="bookingInfo")
 public class BookingInfo {
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	private int bid;
 	private int cid;
 	private int rid;
 	private String startDate;
 	private String endDate;
 	private Room room;
+	private boolean past;
 	
 	public BookingInfo() {}
 	
@@ -86,5 +91,15 @@ public class BookingInfo {
 	
 	public void setRoom(Room room) {
 		this.room = room;
+	}
+	
+	public boolean getPast() throws ParseException {
+		Date start = sdf.parse(getStartDate());
+		Date today = new Date();
+		if (today.compareTo(start) >= 0) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 }

@@ -4,7 +4,7 @@
 <h:head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" type="image/x-icon" href="#{resource['image/icon.png']}"/>
+    <link rel="shortcut icon" type="image/x-icon" href="#{resource['image/icon.png']}" />
     <h:outputStylesheet library="css" name="bootstrap.min.css" />
     <h:outputStylesheet library="css" name="style.css" />
     <h:outputScript library="js" name="jquery.min.js" />
@@ -30,13 +30,13 @@
                     <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right">
                         <div id="mySidenav" class="sidenav text-center">
                             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br />
-	                        <h:form>
-	                            <h:link value="Home" outcome="index" />
-	                            <h:link value="Sign In" outcome="signIn" rendered="#{!sessionUtils.status}"/>
-	                            <h:link value="Sign Up" outcome="signUp" rendered="#{!sessionUtils.status}"/>
-	                            <h:link value="Account" outcome="account" rendered="#{sessionUtils.status}"/>
-								<h:commandLink action="#{member.logout}" value="Logout" rendered="#{sessionUtils.status}"></h:commandLink>
-							</h:form>
+                            <h:form>
+                                <h:link value="Home" outcome="index" />
+                                <h:link value="Sign In" outcome="signIn" rendered="#{!sessionUtils.status}" />
+                                <h:link value="Sign Up" outcome="signUp" rendered="#{!sessionUtils.status}" />
+                                <h:link value="Account" outcome="account" rendered="#{sessionUtils.status}" />
+                                <h:commandLink action="#{member.logout}" value="Logout" rendered="#{sessionUtils.status}"></h:commandLink>
+                            </h:form>
                         </div>
                         <div class="main" id="main">
                             <a href="#" onclick="openNav()">MENU &#9776;</a>
@@ -48,26 +48,21 @@
         </section>
         <section class="element-page">
             <div class="container">
-            	<h2 class="text-center">Available Rooms</h2>
+                <h2 class="text-center">Available Rooms</h2>
                 <hr class="hr-mid" />
                 <p class="text-center">
-                	<p:outputLabel value="#{availableRoom.startDate} to #{availableRoom.endDate}" styleclass="text-center"/><br/>
-                	<p:outputLabel value="#{availableRoom.numOfPeople} People" styleclass="text-center"/>
+                    <p:outputLabel value="#{availableRoom.startDate} to #{availableRoom.endDate}" styleclass="text-center" /><br />
+                    <p:outputLabel value="#{availableRoom.numOfPeople} People" styleclass="text-center" />
                 </p>
-                <h:form style="width:80%; margin:auto" >
-                    <p:dataTable 
-                    		value="#{availableRoom.rooms}" 
-                    		var="room" border="2" 
-                    		styleclass="table text-center" 
-                    		style = "width:100%"
-                    		tableStyle="width:100%;table-layout:auto">
+                <h:form style="width:80%; margin:auto">
+                    <p:dataTable value="#{availableRoom.rooms}" var="room" border="2" styleclass="table text-center" style="width:100%" tableStyle="width:100%;table-layout:auto">
                         <p:column rendered="false">
                             <f:facet name="header">Room ID</f:facet> #{room.rid}
                         </p:column>
-                        <p:column  style="text-align: center">
+                        <p:column style="text-align: center">
                             <f:facet name="header">Name</f:facet> #{room.rname}
                         </p:column>
-                        <p:column  style="text-align: center">
+                        <p:column style="text-align: center">
                             <f:facet name="header">Capacity</f:facet> #{room.rcapacity}
                         </p:column>
                         <p:column style="text-align: center">
@@ -77,10 +72,7 @@
                             <f:facet name="header">Price</f:facet> #{room.rprice}
                         </p:column>
                         <p:column style="text-align: center">
-                            <p:commandButton 
-                            		action="#{bookingManage.select(room.rid, availableRoom.startDate, availableRoom.endDate)}" 
-                            		styleClass="btn btn-default call-btn-3" 
-                            		value="Select">
+                            <p:commandButton action="#{bookingManage.select(room.rid, availableRoom.startDate, availableRoom.endDate)}" styleClass="btn btn-default call-btn-3" value="Select">
                                 <f:param name="rid" value="#{room.rid}" />
                                 <f:param name="startDate" value="#{availableRoom.startDate}" />
                                 <f:param name="endDate" value="#{availableRoom.endDate}" />
@@ -88,6 +80,9 @@
                         </p:column>
                     </p:dataTable>
                 </h:form>
+                <div class="wow-btn text-center" style="width:300px; margin: auto;">
+                    <h:button value="Back" outcome="roomLookup" styleClass="btn btn-default call-btn-2 wow-button" />
+                </div>
             </div>
         </section>
         <section class="footer">

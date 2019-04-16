@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" 
-		xmlns:f="http://java.sun.com/jsf/core" 
-		xmlns:h="http://java.sun.com/jsf/html" 
-		xmlns:p="http://primefaces.org/ui" 
-		xmlns:a="http://xmlns.jcp.org/jsf/passthrough" 
-		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" type="image/x-icon" href="#{resource['image/icon.png']}"/>
+    <link rel="shortcut icon" type="image/x-icon" href="#{resource['image/icon.png']}" />
     <h:outputStylesheet library="css" name="bootstrap.min.css" />
     <h:outputStylesheet library="css" name="style.css" />
     <h:outputScript library="js" name="jquery.min.js" />
@@ -36,13 +31,13 @@
                     <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right">
                         <div id="mySidenav" class="sidenav text-center">
                             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br />
-	                        <h:form>
-	                            <h:link value="Home" outcome="index" />
-	                            <h:link value="Sign In" outcome="signIn" rendered="#{!sessionUtils.status}"/>
-	                            <h:link value="Sign Up" outcome="signUp" rendered="#{!sessionUtils.status}"/>
-	                            <h:link value="Account" outcome="account" rendered="#{sessionUtils.status}"/>
-								<h:commandLink action="#{member.logout}" value="Logout" rendered="#{sessionUtils.status}"></h:commandLink>
-							</h:form>
+                            <h:form>
+                                <h:link value="Home" outcome="index" />
+                                <h:link value="Sign In" outcome="signIn" rendered="#{!sessionUtils.status}" />
+                                <h:link value="Sign Up" outcome="signUp" rendered="#{!sessionUtils.status}" />
+                                <h:link value="Account" outcome="account" rendered="#{sessionUtils.status}" />
+                                <h:commandLink action="#{member.logout}" value="Logout" rendered="#{sessionUtils.status}"></h:commandLink>
+                            </h:form>
                         </div>
                         <div class="main" id="main">
                             <a href="#" onclick="openNav()">MENU &#9776;</a>
@@ -58,14 +53,14 @@
                 <hr class="hr-mid" />
                 <h3 class="text-center">
                     #{bookingManage.startDate} to #{bookingManage.endDate}<br />
-                    <h4 class="text-center"><a href="#" onclick="history.go(-2)">Want to change the date?</a></h4>
+                    <h4 class="link text-center"><a onclick="history.go(-2)">Want to change the date?</a></h4>
                 </h3>
                 <h3 class="text-center">
                     #{bookingManage.room.rname} ● $#{bookingManage.room.rprice} / Night<br />
-                    <h4 class="text-center"><a href="javascript:history.back()">Want to change the room?</a></h4>
+                    <h4 class="link text-center"><a href="javascript:history.back()">Want to change the room?</a></h4>
                 </h3>
             </div>
-            <hr class="line-full" style="width:80%"/>
+            <hr class="line-full" style="width:80%" />
             <div class="container" style="width:80%; margin:auto ">
                 <h2 class="text-center">Input Your Information</h2>
                 <hr class="hr-mid" />
@@ -76,12 +71,7 @@
                                 <h3>First Name:</h3>
                             </div>
                             <div class="col-xs-12 col-md-7">
-                                <h:inputText value="#{customer.firstName}" 
-                                	id="firstName"
-									required="true" 
-                                	requiredMessage="First Name is mandatory." 
-                                	a:placeholder="First Name"
-                                	validator="#{validation.validateName}" />
+                                <h:inputText value="#{customer.firstName}" id="firstName" required="true" requiredMessage="First Name is mandatory." a:placeholder="First Name" validator="#{validation.validateName}" />
                                 <h:message for="firstName" styleClass="error" />
                             </div>
                         </div>
@@ -90,13 +80,8 @@
                                 <h3>Last Name:</h3>
                             </div>
                             <div class="col-xs-12 col-md-7">
-                                <h:inputText value="#{customer.lastName}" 
-                                	id="lastName"
-									required="true" 
-                                	requiredMessage="Last Name is mandatory." 
-                                	a:placeholder="Last Name" 
-                                	validator="#{validation.validateName}" />
-                            	<h:message for="lastName" styleClass="error" />
+                                <h:inputText value="#{customer.lastName}" id="lastName" required="true" requiredMessage="Last Name is mandatory." a:placeholder="Last Name" validator="#{validation.validateName}" />
+                                <h:message for="lastName" styleClass="error" />
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -104,12 +89,7 @@
                                 <h3>Email:</h3>
                             </div>
                             <div class="col-xs-12 col-md-7">
-                                <h:inputText value="#{customer.email}" 
-                                	id="email" 
-                                	required="true" 
-                                	requiredMessage="Your email is mandatory." 
-                                	a:placeholder="Your Email Address"
-									validator="#{validation.validateEmail}" />
+                                <h:inputText value="#{customer.email}" id="email" required="true" requiredMessage="Your email is mandatory." a:placeholder="Your Email Address" validator="#{validation.validateEmail}" />
                                 <h:message for="email" styleClass="error" />
                             </div>
                         </div>
@@ -118,14 +98,9 @@
                                 <h3>Phone:</h3>
                             </div>
                             <div class="col-xs-12 col-md-7">
-                                <h:inputText value="#{customer.phone}" 
-                                	id="phoneNum"
-									required="true" 
-                                	requiredMessage="Your phone is mandatory." 
-                                	a:placeholder="Your phone number" 
-                                	validatorMessage="Phone number must follow xxx-xxx-xxxx">
-            						<f:validateRegex pattern="\d{3}-\d{3}-\d{4}" />
-            					</h:inputText>
+                                <h:inputText value="#{customer.phone}" id="phoneNum" required="true" requiredMessage="Your phone is mandatory." a:placeholder="Your phone number" validatorMessage="Phone number must follow xxx-xxx-xxxx">
+                                    <f:validateRegex pattern="\d{3}-\d{3}-\d{4}" />
+                                </h:inputText>
                                 <h:message for="phoneNum" styleClass="error" />
                             </div>
                         </div>
@@ -134,19 +109,13 @@
                                 <h3>Address:</h3>
                             </div>
                             <div class="col-xs-12 col-md-9">
-                                <h:inputText value="#{customer.address}" 
-                                	id="address" 
-                                	required="true" 
-                                	requiredMessage="Your address is mandatory."
-									a:placeholder="Your address"
-									validator="#{validation.validateAddress}" />
+                                <h:inputText value="#{customer.address}" id="address" required="true" requiredMessage="Your address is mandatory." a:placeholder="Your address" validator="#{validation.validateAddress}" />
                                 <h:message for="address" styleClass="error" />
                             </div>
                         </div>
-
-                        <div style="text-align:center">
-                        	<h:commandButton value="Submit" styleClass="btn btn-default call-btn-1" action="#{bookingManage.addBooking(customer)}">
-								<f:param name="rid" value="#{param.rid}" />
+                        <div class="wow-btn text-center" style="width:300px; margin: auto;">
+                            <h:commandButton value="Submit" styleClass="btn btn-default call-btn-2 wow-button" action="#{bookingManage.addBooking(customer)}">
+                                <f:param name="rid" value="#{param.rid}" />
                                 <f:param name="startDate" value="#{param.startDate}" />
                                 <f:param name="endDate" value="#{param.endDate}" />
                             </h:commandButton>

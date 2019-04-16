@@ -50,10 +50,8 @@ body{
     letter-spacing: 2px;
 }
 .element-page a{
-    padding: 5%;
     text-decoration: none;
     color: black;
-    display: block;
     transition: 0.3s;
     font-size: 16px;
     letter-spacing: 2px;
