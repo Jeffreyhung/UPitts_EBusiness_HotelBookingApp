@@ -122,7 +122,7 @@ public class Member {
 			pstmt2.executeUpdate();
 			pstmt2.close();
 			HttpSession session = SessionUtils.getSession();
-			session.setAttribute("username", username);
+			session.setAttribute("username", customer.getUsername());
 			return "index";
 		}else {
 			FacesContext.getCurrentInstance().addMessage("signUp:username", new FacesMessage("Username already in use, please choose another username"));

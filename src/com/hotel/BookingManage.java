@@ -1,6 +1,8 @@
 package com.hotel;
 
 import javax.faces.bean.*;
+import javax.servlet.http.HttpSession;
+
 import com.hotel.DBConnection;
 import com.hotel.SessionUtils;
 
@@ -82,6 +84,9 @@ public class BookingManage {
 			}
 			rs0.close();
 			pstmt0.close();
+		}else {
+			Customer tem = new Customer();
+			this.customer = tem;
 		}
 		
 	// Get Room info
@@ -102,8 +107,8 @@ public class BookingManage {
 		connect.close();
 	}
 	
-	public String addBooking(Customer cust) throws ClassNotFoundException, SQLException{
-		setCustomer(cust);
+	public String addBooking() throws ClassNotFoundException, SQLException{
+		//setCustomer(cust);
 		int customerID = 0;
 		int bookingID = 0;
 		Connection connect = DBConnection.connectDB();
@@ -118,7 +123,8 @@ public class BookingManage {
 			rs.close();
 			pstmt.close();
 			customer.setCid(customerID);
-			
+			HttpSession session = SessionUtils.getSession();
+			session.setAttribute("cid", customer.getCid());
 			// Add value to customer table
 			PreparedStatement pstmt2 = connect.prepareStatement("INSERT INTO customer (CID, FirstName, LastName, Address, PhoneNum, Email)VALUES (?, ?, ?, ?, ?, ?) ");
 			pstmt2.setInt(1, customer.getCid());
@@ -130,7 +136,6 @@ public class BookingManage {
 			pstmt2.executeUpdate();
 			pstmt2.close();
 		}
-		
 	// Get booking ID
 		PreparedStatement pstmt3 = connect.prepareStatement("SELECT MAX(bid) FROM bookinginfo");
 		ResultSet rs2 = pstmt3.executeQuery();
@@ -148,9 +153,22 @@ public class BookingManage {
 		pstmt4.setString(5, endDate);
 		pstmt4.executeUpdate();
 		pstmt4.close();
-		connect.close();
 	// Get room info
-		onload();
+		PreparedStatement pstmt = connect.prepareStatement("SELECT * FROM room WHERE RID = ?");
+		pstmt.setInt(1, getRid());
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			Room temp  = new Room();
+			temp.setRid(rs.getInt("RID"));
+			temp.setRname(rs.getString("Name"));
+			temp.setRcapacity(rs.getInt("Capacity"));
+			temp.setRbeds(rs.getInt("NumOfBeds"));
+			temp.setRprice(rs.getInt("Price"));
+			this.setRoom(temp);
+		}
+		rs.close();
+		pstmt.close();
+		connect.close();
 	//redirect to confirmation page
 		return "confirmation";
 	}
