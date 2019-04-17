@@ -1,5 +1,4 @@
-# INFSCI 2730 E-Business Final Project  
-# Hotel Booking Application  
+# INFSCI 2730 E-Business Final Project  Hotel Booking Application  
 
 
 ## Group Member
