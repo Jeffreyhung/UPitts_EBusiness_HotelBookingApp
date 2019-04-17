@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # INFSCI 2730 E-Business Final Project  
 # Hotel Booking Application  
 
