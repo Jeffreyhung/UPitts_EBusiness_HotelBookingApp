@@ -55,7 +55,7 @@
                     <p:outputLabel value="#{availableRoom.numOfPeople} People" styleclass="text-center" />
                 </p>
                 <h:form style="width:80%; margin:auto">
-                    <p:dataTable value="#{availableRoom.rooms}" var="room" border="2" styleclass="table text-center" style="width:100%" tableStyle="width:100%;table-layout:auto">
+                    <p:dataTable value="#{availableRoom.rooms}" var="room" border="2" styleclass="table text-center" style="width:100%" tableStyle="width:100%;table-layout:auto"  emptyMessage="No available room found">
                         <p:column rendered="false">
                             <f:facet name="header">Room ID</f:facet> #{room.rid}
                         </p:column>
